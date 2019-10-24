@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -26,4 +29,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    //Parsen
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //di
+    implementation "com.google.dagger:dagger:2.8"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.8"
+
+    //DataBind//Viewmodel
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    //implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+
 }
