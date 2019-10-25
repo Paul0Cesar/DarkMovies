@@ -35,11 +35,18 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     //di
-    implementation "com.google.dagger:dagger:2.8"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.8"
+    implementation "com.google.dagger:dagger:2.16"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.16"
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.16"
+    implementation "com.google.dagger:dagger-android-support:2.16"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:2.16"
+
+
 
     //DataBind//Viewmodel
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
-    //implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.0.0"
+
+
 
 }

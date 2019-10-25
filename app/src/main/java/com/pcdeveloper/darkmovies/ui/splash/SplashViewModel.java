@@ -2,15 +2,18 @@ package com.pcdeveloper.darkmovies.ui.splash;
 
 import android.util.Log;
 
-import androidx.databinding.library.baseAdapters.BR;
-import androidx.lifecycle.ViewModel;
 
-import com.pcdeveloper.darkmovies.data.Movie;
+import com.pcdeveloper.darkmovies.data.DataManager;
+import com.pcdeveloper.darkmovies.data.models.Movie;
+import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
 
-public class SplashViewModel extends ViewModel {
+public class SplashViewModel extends BaseViewModel {
 
     private Movie movie;
 
+    public SplashViewModel(DataManager dataManager) {
+        super(dataManager);
+    }
 
 
     public void click(){
@@ -18,10 +21,5 @@ public class SplashViewModel extends ViewModel {
 
     }
 
-    public String setSub_name(String sub_name){
-        movie.setSub_name(sub_name);
 
-
-
-    }
 }

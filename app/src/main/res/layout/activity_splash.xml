@@ -16,9 +16,11 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@={viewModel.name}"
+            android:layout_marginBottom="8dp"
+            android:text="JOAO"
+            android:textSize="36sp"
             app:layout_constraintBottom_toTopOf="@+id/editText"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -32,24 +34,26 @@
             android:layout_marginLeft="100dp"
             android:layout_marginEnd="98dp"
             android:layout_marginRight="98dp"
+            android:layout_marginBottom="208dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@={viewModel.Sub_name}"
+            android:text="Maria"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="150dp"
             android:layout_marginLeft="150dp"
             android:layout_marginEnd="173dp"
             android:layout_marginRight="173dp"
             android:layout_marginBottom="145dp"
-            android:text="Enter"
             android:onClick="@{()->viewModel.click()}"
+            android:text="Enter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
