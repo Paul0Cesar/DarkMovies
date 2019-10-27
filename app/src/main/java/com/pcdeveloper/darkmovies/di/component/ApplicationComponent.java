@@ -14,12 +14,11 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {AndroidSupportInjectionModule.class,ApplicationModule.class, ActivityBuilder.class})
+@Component(modules = {AndroidInjectionModule.class,ApplicationModule.class, ActivityBuilder.class})
 public interface ApplicationComponent {
 
 
     void inject(App app);
-
 
     @Component.Builder
     interface Builder {

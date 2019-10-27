@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DarkMovies</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_search">Buscas</string>
+    <string name="title_fav">Favoritos</string>
 </resources>

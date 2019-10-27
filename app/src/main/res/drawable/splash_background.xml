@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <gradient
+                android:centerX="0.5"
+                android:centerY="0.5"
+                android:endColor="@color/colorPrimary"
+                android:gradientRadius="200dp"
+                android:startColor="@color/colorPrimaryDark"
+                android:type="radial">
+            </gradient>
+        </shape>
+    </item>
+
+    <item
+        android:left="-33dp"
+        android:top="-30dp">
+        <bitmap android:src="@drawable/teia"
+            android:gravity="top|left">
+
+        </bitmap>
+    </item>
+
+
+</layer-list>

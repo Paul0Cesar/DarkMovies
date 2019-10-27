@@ -5,17 +5,17 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.pcdeveloper.darkmovies.data.DataManager;
+import com.pcdeveloper.darkmovies.ui.main.MainActivity;
+import com.pcdeveloper.darkmovies.ui.main.MainViewModel;
 import com.pcdeveloper.darkmovies.ui.splash.SplashViewModel;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-@SuppressWarnings("unchecked")
-
 
 
 @Singleton
-public class ViewModelProviderFactory implements ViewModelProvider.Factory {
+public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFactory {
 
     private final DataManager dataManager;
 
@@ -26,10 +26,13 @@ public class ViewModelProviderFactory implements ViewModelProvider.Factory {
     }
 
 
+
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(SplashViewModel.class)) {
             return (T) new SplashViewModel(dataManager);
+        }else if(modelClass.isAssignableFrom(MainViewModel.class)){
+            return (T)new MainViewModel(dataManager);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

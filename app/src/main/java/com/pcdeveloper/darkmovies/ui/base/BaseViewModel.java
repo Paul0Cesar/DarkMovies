@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 public abstract class BaseViewModel extends ViewModel {
 
+
     private DataManager dataManager;
 
 
