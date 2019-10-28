@@ -20,7 +20,14 @@ import com.pcdeveloper.darkmovies.ui.base.BaseActivity;
 
 import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding,MainViewModel>  {
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class MainActivity extends BaseActivity<ActivityMainBinding,MainViewModel>  implements HasSupportFragmentInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Fragment>fragmentDispatchingAndroidInjector;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -60,4 +67,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding,MainViewModel
     }
 
 
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
+    }
 }

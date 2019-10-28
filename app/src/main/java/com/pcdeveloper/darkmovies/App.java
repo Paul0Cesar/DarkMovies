@@ -3,6 +3,7 @@ package com.pcdeveloper.darkmovies;
 import android.app.Activity;
 import android.app.Application;
 
+import com.pcdeveloper.darkmovies.data.DataManager;
 import com.pcdeveloper.darkmovies.di.component.DaggerApplicationComponent;
 
 import javax.inject.Inject;
@@ -16,6 +17,9 @@ public class App extends Application implements HasActivityInjector {
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
+    @Inject
+    DataManager mDataManager;
+
 
     @Override
     public void onCreate() {
@@ -25,10 +29,19 @@ public class App extends Application implements HasActivityInjector {
                 .application(this)
                 .build()
                 .inject(this);
+
+        mDataManager.openDb();
+
     }
 
     @Override
     public AndroidInjector<Activity> activityInjector() {
         return activityDispatchingAndroidInjector;
+    }
+
+    @Override
+    public void onTerminate() {
+        mDataManager.closeDb();
+        super.onTerminate();
     }
 }
