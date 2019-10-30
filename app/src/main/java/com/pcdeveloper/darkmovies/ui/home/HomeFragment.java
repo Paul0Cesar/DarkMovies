@@ -65,12 +65,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
     }
 
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getViewModel().initList();
         initRecyclerView();
         observeMovies();
-        getViewModel().onRefreshList();
+
     }
 
     private void initRecyclerView() {

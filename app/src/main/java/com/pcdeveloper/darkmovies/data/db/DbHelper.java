@@ -1,11 +1,11 @@
 package com.pcdeveloper.darkmovies.data.db;
 
-import com.pcdeveloper.darkmovies.data.db.dao.ImageDao;
+import com.pcdeveloper.darkmovies.data.db.dao.MovieDao;
 
 public interface DbHelper {
 
     void openDb();
     void closeDb();
 
-    ImageDao createImageDao();
+    MovieDao createMovieDao();
 }

@@ -2,9 +2,13 @@ package com.pcdeveloper.darkmovies.data.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Movie {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class Movie  extends RealmObject {
 
 
+    @PrimaryKey
     private int id;
 
     @SerializedName("poster_path")
@@ -38,7 +42,6 @@ public class Movie {
     @SerializedName("vote_average")
     private  float voteAverage;
 
-    private Image image;
 
 
     public int getId() {
@@ -137,13 +140,6 @@ public class Movie {
         this.voteAverage = voteAverage;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
 
 
 }

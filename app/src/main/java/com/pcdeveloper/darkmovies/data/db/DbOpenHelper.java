@@ -2,7 +2,7 @@ package com.pcdeveloper.darkmovies.data.db;
 
 import android.content.Context;
 
-import com.pcdeveloper.darkmovies.data.db.dao.ImageDao;
+import com.pcdeveloper.darkmovies.data.db.dao.MovieDao;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,9 +40,9 @@ public class DbOpenHelper implements DbHelper {
     }
 
     @Override
-    public ImageDao createImageDao() {
+    public MovieDao createMovieDao() {
         checkIfRealmIsOpen();
-        return new ImageDao(mRealm);
+        return new MovieDao(mRealm);
     }
 
     private void checkIfRealmIsOpen(){

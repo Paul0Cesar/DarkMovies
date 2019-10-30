@@ -18,6 +18,7 @@ public class HomeViewModel extends BaseViewModel {
    private MutableLiveData<PageMovie> pageMovies=new MutableLiveData<>();
    private MutableLiveData<Boolean> isRefreshing=new MutableLiveData<>();
    private String LANGUAGE="pt-BR";
+   private int flag=0;
     //val hasError: MutableLiveData<Boolean> = MutableLiveData()
 
 
@@ -47,6 +48,13 @@ public class HomeViewModel extends BaseViewModel {
             this.pageMovies.setValue(pg);
         }
         getNowPlaying(LANGUAGE,1);
+    }
+
+    public void initList(){
+        if(flag==0){
+            getNowPlaying(LANGUAGE,1);
+            flag=1;
+        }
     }
 
     private void getNowPlaying(String language, final int page){

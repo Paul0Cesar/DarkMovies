@@ -4,19 +4,20 @@ import androidx.annotation.NonNull;
 
 import com.pcdeveloper.darkmovies.data.db.dao.base.Dao;
 import com.pcdeveloper.darkmovies.data.db.dao.base.DaoCrud;
-import com.pcdeveloper.darkmovies.data.models.Image;
+import com.pcdeveloper.darkmovies.data.models.Movie;
+
 import java.util.List;
 import io.realm.Realm;
 
 
-public class ImageDao extends Dao implements DaoCrud<Image> {
+public class MovieDao extends Dao implements DaoCrud<Movie> {
 
-    public ImageDao(@NonNull Realm mRealm) {
+    public MovieDao(@NonNull Realm mRealm) {
         super(mRealm);
     }
 
     @Override
-    public void save(final Image tosave) {
+    public void save(final Movie tosave) {
         super.mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -27,7 +28,7 @@ public class ImageDao extends Dao implements DaoCrud<Image> {
     }
 
     @Override
-    public void save(final List<Image> tosaveArray) {
+    public void save(final List<Movie> tosaveArray) {
         super.mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -40,15 +41,15 @@ public class ImageDao extends Dao implements DaoCrud<Image> {
 
 
     @Override
-    public Image loadById(int id) {
-        Image img=super.mRealm.where(Image.class).equalTo("id",id).findFirst();
-        return img;
+    public Movie loadById(int id) {
+        Movie mv=super.mRealm.where(Movie.class).equalTo("id",id).findFirst();
+        return mv;
     }
 
     @Override
     public Boolean findById(int id) {
-        Image img=super.mRealm.where(Image.class).equalTo("id",id).findFirst();
-        if(img!=null){
+        Movie mv=super.mRealm.where(Movie.class).equalTo("id",id).findFirst();
+        if(mv!=null){
             return  true;
         }else{
             return  false;
@@ -57,7 +58,7 @@ public class ImageDao extends Dao implements DaoCrud<Image> {
     }
 
     @Override
-    public void remove(@NonNull final Image object) {
+    public void remove(@NonNull final Movie object) {
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -70,6 +71,6 @@ public class ImageDao extends Dao implements DaoCrud<Image> {
 
     @Override
     public int count() {
-        return (int) mRealm.where(Image.class).count();
+        return (int) mRealm.where(Movie.class).count();
     }
 }

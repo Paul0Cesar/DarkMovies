@@ -3,10 +3,9 @@ package com.pcdeveloper.darkmovies.data;
 import android.content.Context;
 
 import com.pcdeveloper.darkmovies.data.db.DbHelper;
-import com.pcdeveloper.darkmovies.data.db.dao.ImageDao;
+import com.pcdeveloper.darkmovies.data.db.dao.MovieDao;
 import com.pcdeveloper.darkmovies.data.network.ApiHelper;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
-import com.pcdeveloper.darkmovies.data.prefs.Prefs;
 import com.pcdeveloper.darkmovies.data.prefs.PrefsHelper;
 
 import javax.inject.Inject;
@@ -44,8 +43,8 @@ public class AppDataManager  implements DataManager {
     }
 
     @Override
-    public ImageDao createImageDao() {
-        return mDbHelper.createImageDao();
+    public MovieDao createMovieDao() {
+        return mDbHelper.createMovieDao();
     }
 
     @Override

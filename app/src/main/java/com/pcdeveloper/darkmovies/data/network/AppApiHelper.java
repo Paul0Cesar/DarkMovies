@@ -1,25 +1,12 @@
 package com.pcdeveloper.darkmovies.data.network;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
-import androidx.lifecycle.MutableLiveData;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.Resource;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.pcdeveloper.darkmovies.R;
-import com.pcdeveloper.darkmovies.data.DataManager;
 import com.pcdeveloper.darkmovies.data.db.DbHelper;
-import com.pcdeveloper.darkmovies.data.models.Image;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
-
-import java.io.ByteArrayOutputStream;
 
 import javax.inject.Inject;
 
