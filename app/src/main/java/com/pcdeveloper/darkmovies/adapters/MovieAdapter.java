@@ -2,6 +2,7 @@ package com.pcdeveloper.darkmovies.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -16,6 +17,7 @@ import com.pcdeveloper.darkmovies.R;
 import com.pcdeveloper.darkmovies.data.DataManager;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.databinding.AdapterMovieBinding;
+import com.pcdeveloper.darkmovies.util.Constants;
 
 import java.util.ArrayList;
 
@@ -25,12 +27,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
     private ArrayList<Movie> movies;
 
-    DataManager mDataManager;
     private Context mContext;
+    private onClickListenerAdapter onClick;
 
-    public MovieAdapter(DataManager mDataManager) {
-        this.mDataManager = mDataManager;
+
+    public void onClickListener(onClickListenerAdapter onClickListenerAdapter){
+        this.onClick=onClickListenerAdapter;
     }
+
+
 
     @NonNull
     @Override
@@ -45,10 +50,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Movie currentMovie = movies.get(position);
-        holder.onBind(currentMovie);
+        holder.onBind(currentMovie,onClick);
 
         Glide.with(mContext)
-                .load(mDataManager.getImageConfig()+currentMovie.getPosterPath())
+                .load(Constants.BASE_URL_IMG +currentMovie.getPosterPath())
                 .placeholder(R.drawable.ic_refresh_24dp)
                 .error(R.drawable.ic_broken_image_24dp)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -65,12 +70,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     }
 
     public void setMovieList(ArrayList<Movie> movies){
-        /*
-        if(  this.movies!=null &&  this.movies.size()>0){
-            this.movies.addAll(movies);
-        }else{
-            this.movies=movies;
-        }*/
         this.movies=movies;
         notifyDataSetChanged();
     }
@@ -88,10 +87,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             return this.movieListItemBinding.imageView;
         }
 
-        public void onBind(Movie movie){
+        public void onBind(final Movie movie, final onClickListenerAdapter click){
             this.movieListItemBinding.setItem(movie);
+            this.movieListItemBinding.cardViewAdapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(click!=null){
+                        click.onClick(movies.get(getAdapterPosition()));
+                    }
+
+                }
+            });
         }
 
+    }
 
+
+    public interface onClickListenerAdapter{
+        void onClick(Movie e);
     }
 }

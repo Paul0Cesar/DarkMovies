@@ -1,6 +1,7 @@
 package com.pcdeveloper.darkmovies.ui.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.databinding.FragmentHomeBinding;
 import com.pcdeveloper.darkmovies.di.ViewModelProviderFactory;
 import com.pcdeveloper.darkmovies.ui.base.BaseFragment;
+import com.pcdeveloper.darkmovies.ui.infos.MovieInfosctivity;
+import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.RecyclerViewClickListeners;
 
 import javax.inject.Inject;
@@ -45,6 +48,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
     private HomeViewModel homeViewModel;
 
     private RecyclerView mRecyclerView;
+
+    private String INFOS_MOVIE= Constants.INFOS_MOVIE;
 
 
 
@@ -71,7 +76,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         super.onViewCreated(view, savedInstanceState);
         getViewModel().initList();
         initRecyclerView();
-        observeMovies();
+        setObservers();
 
     }
 
@@ -79,16 +84,32 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         mRecyclerView = getDataBinding().recyclerMovies;
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
+        mMovieAdapter.onClickListener(getViewModel().onClick());
         mRecyclerView.setAdapter(mMovieAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerViewClickListeners(getViewModel().getClick()));
 
     }
 
-    private void observeMovies() {
+    private void setObservers() {
         getViewModel().getMovies().observe(this, new Observer<PageMovie>() {
             @Override
             public void onChanged(PageMovie pageMovie) {
                 mMovieAdapter.setMovieList(pageMovie.getMovies());
+            }
+        });
+
+        getViewModel().getNavigator().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(s!=null){
+                    String mv=getViewModel().getMovieToSee();
+                    if(mv!=null && mv.length()>0){
+                        Intent i=new Intent(getContext(), MovieInfosctivity.class);
+                        i.putExtra("movie",mv);
+                        startActivity(i);
+                    }
+
+                }
             }
         });
 

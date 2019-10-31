@@ -47,8 +47,5 @@ public class AppDataManager  implements DataManager {
         return mDbHelper.createMovieDao();
     }
 
-    @Override
-    public String getImageConfig() {
-        return "https://image.tmdb.org/t/p/w500/";
-    }
+
 }

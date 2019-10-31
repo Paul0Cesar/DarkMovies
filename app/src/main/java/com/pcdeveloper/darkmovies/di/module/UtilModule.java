@@ -18,8 +18,8 @@ public class UtilModule {
 
 
     @Provides
-    MovieAdapter proviceMovieAdapter(AppDataManager dataManager){
-        return new MovieAdapter(dataManager);
+    MovieAdapter proviceMovieAdapter(){
+        return new MovieAdapter();
     }
 
     @Provides

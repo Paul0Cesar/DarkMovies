@@ -7,6 +7,7 @@ import com.pcdeveloper.darkmovies.data.db.DbHelper;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
+import com.pcdeveloper.darkmovies.util.Constants;
 
 import javax.inject.Inject;
 
@@ -20,8 +21,8 @@ public class AppApiHelper implements  ApiHelper {
 
     private Context mContext;
     private Retrofit mRetrofit;
-    private String BASE_URL="http://api.themoviedb.org/3/";
-    private String API_KEY="299944006d221f95281489351f1c19fa";
+    private String BASE_URL= Constants.BASE_URL;
+    private String API_KEY=Constants.API_KEY;
     private ApiService mService;
     private DbHelper dbHelper;
 

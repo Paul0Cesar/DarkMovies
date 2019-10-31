@@ -6,19 +6,24 @@ import androidx.databinding.Bindable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.pcdeveloper.darkmovies.adapters.MovieAdapter;
 import com.pcdeveloper.darkmovies.data.DataManager;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
+import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.RecyclerViewClickListeners;
 
 public class HomeViewModel extends BaseViewModel {
 
    private MutableLiveData<PageMovie> pageMovies=new MutableLiveData<>();
    private MutableLiveData<Boolean> isRefreshing=new MutableLiveData<>();
-   private String LANGUAGE="pt-BR";
+   private String LANGUAGE= Constants.LANGUAGE;
+   private MutableLiveData<String> mNavigator=new MutableLiveData<>();
    private int flag=0;
+   private Movie toSee;
+   private String INFOS_MOVIE=Constants.INFOS_MOVIE;
     //val hasError: MutableLiveData<Boolean> = MutableLiveData()
 
 
@@ -27,12 +32,14 @@ public class HomeViewModel extends BaseViewModel {
     public LiveData<Boolean> getIsRefreshing() {
         return isRefreshing;
     }
-
-
     public  LiveData<PageMovie> getMovies(){
         return pageMovies;
     }
+    public LiveData<String> getNavigator(){return  mNavigator;}
 
+    public String getMovieToSee(){//retorna o filme que vai ser exibido
+     return toSee.toJson(toSee);
+    }
 
 
 
@@ -115,8 +122,16 @@ public class HomeViewModel extends BaseViewModel {
 
     }
 
-    public void onClick(Movie e){
-        Log.d("Pc","CHEGOU AQUIII!!!");
+    public MovieAdapter.onClickListenerAdapter onClick(){
+       return new MovieAdapter.onClickListenerAdapter() {
+           @Override
+           public void onClick(Movie e) {
+               if(e!=null){
+                   toSee=e;
+                   mNavigator.postValue(INFOS_MOVIE);
+               }
+           }
+       };
     }
 
 }

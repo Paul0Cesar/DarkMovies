@@ -7,35 +7,50 @@
         <variable
             name="item"
             type="com.pcdeveloper.darkmovies.data.models.Movie" />
-        <variable
-            name="HFragment"
-            type="com.pcdeveloper.darkmovies.ui.home.HomeViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:id="@+id/cardViewAdapter"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        android:onClick="@{()->HFragment.onClick(item)}">
+        app:cardBackgroundColor="@android:color/white"
+        tools:layout_width="160dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <!-- W (para restringir a largura) -->
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="160dp"
-                android:layout_height="180dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="W,3:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher_round" />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{item.title}" />
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:maxLines="2"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@{item.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 </layout>

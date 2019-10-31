@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.pcdeveloper.darkmovies.data.DataManager;
 import com.pcdeveloper.darkmovies.ui.home.HomeViewModel;
+import com.pcdeveloper.darkmovies.ui.infos.MovieInfosViewModel;
+import com.pcdeveloper.darkmovies.ui.infos.MovieInfosctivity;
 import com.pcdeveloper.darkmovies.ui.main.MainActivity;
 import com.pcdeveloper.darkmovies.ui.main.MainViewModel;
 import com.pcdeveloper.darkmovies.ui.splash.SplashViewModel;
@@ -36,7 +38,10 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T)new MainViewModel(dataManager);
         }else if(modelClass.isAssignableFrom(HomeViewModel.class)){
             return (T)new HomeViewModel(dataManager);
+        }else if(modelClass.isAssignableFrom(MovieInfosViewModel.class)){
+            return  (T) new MovieInfosViewModel(dataManager);
         }
+
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
 }

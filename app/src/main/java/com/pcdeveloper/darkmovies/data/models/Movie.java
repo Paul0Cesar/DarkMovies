@@ -1,5 +1,6 @@
 package com.pcdeveloper.darkmovies.data.models;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
@@ -140,6 +141,10 @@ public class Movie  extends RealmObject {
         this.voteAverage = voteAverage;
     }
 
+    public String toJson(Movie e){
+        Gson j=new Gson();
+        return  j.toJson(e);
+    }
 
 
 }
