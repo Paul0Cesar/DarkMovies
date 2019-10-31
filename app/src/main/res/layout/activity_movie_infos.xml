@@ -1,20 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="viewModel"
             type="com.pcdeveloper.darkmovies.ui.infos.MovieInfosViewModel" />
     </data>
-    <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button"
+    <!--android:fitsSystemWindows="true" Garantir a não sobreposição dos elementos-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.infos.MovieInfosctivity"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppBar">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-    </LinearLayout>
+            android:layout_height="@dimen/app_bar_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toobar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@{viewModel.titleMovie}">
+
+
+                <ImageView
+                    android:id="@+id/backdrop_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"/>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:layout_scrollFlags="scroll|enterAlways"
+
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!--Define o responsavel pela rolagem um link com app bar (layout_behavior)-->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/movie_infos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

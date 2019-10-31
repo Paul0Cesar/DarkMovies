@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_height">256dp</dimen>
+    <dimen name="text_sub">52dp</dimen>
+</resources>

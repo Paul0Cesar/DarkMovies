@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
@@ -55,6 +56,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding,MainViewModel
 
         navInit();
     }
+
+
 
     private void navInit() {//Ativa o menu inferior para navegação entre os fragmentos
         BottomNavigationView navView = findViewById(R.id.nav_view);
