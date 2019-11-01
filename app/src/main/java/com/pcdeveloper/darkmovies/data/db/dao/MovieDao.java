@@ -4,20 +4,20 @@ import androidx.annotation.NonNull;
 
 import com.pcdeveloper.darkmovies.data.db.dao.base.Dao;
 import com.pcdeveloper.darkmovies.data.db.dao.base.DaoCrud;
-import com.pcdeveloper.darkmovies.data.models.Movie;
+import com.pcdeveloper.darkmovies.data.models.Poster;
 
 import java.util.List;
 import io.realm.Realm;
 
 
-public class MovieDao extends Dao implements DaoCrud<Movie> {
+public class MovieDao extends Dao implements DaoCrud<Poster> {
 
     public MovieDao(@NonNull Realm mRealm) {
         super(mRealm);
     }
 
     @Override
-    public void save(final Movie tosave) {
+    public void save(final Poster tosave) {
         super.mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -28,7 +28,7 @@ public class MovieDao extends Dao implements DaoCrud<Movie> {
     }
 
     @Override
-    public void save(final List<Movie> tosaveArray) {
+    public void save(final List<Poster> tosaveArray) {
         super.mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -41,14 +41,14 @@ public class MovieDao extends Dao implements DaoCrud<Movie> {
 
 
     @Override
-    public Movie loadById(int id) {
-        Movie mv=super.mRealm.where(Movie.class).equalTo("id",id).findFirst();
+    public Poster loadById(int id) {
+        Poster mv=super.mRealm.where(Poster.class).equalTo("id",id).findFirst();
         return mv;
     }
 
     @Override
     public Boolean findById(int id) {
-        Movie mv=super.mRealm.where(Movie.class).equalTo("id",id).findFirst();
+        Poster mv=super.mRealm.where(Poster.class).equalTo("id",id).findFirst();
         if(mv!=null){
             return  true;
         }else{
@@ -58,7 +58,7 @@ public class MovieDao extends Dao implements DaoCrud<Movie> {
     }
 
     @Override
-    public void remove(@NonNull final Movie object) {
+    public void remove(@NonNull final Poster object) {
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -71,6 +71,6 @@ public class MovieDao extends Dao implements DaoCrud<Movie> {
 
     @Override
     public int count() {
-        return (int) mRealm.where(Movie.class).count();
+        return (int) mRealm.where(Poster.class).count();
     }
 }

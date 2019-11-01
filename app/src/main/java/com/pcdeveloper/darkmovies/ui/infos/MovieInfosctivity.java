@@ -1,18 +1,15 @@
 package com.pcdeveloper.darkmovies.ui.infos;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
@@ -21,10 +18,12 @@ import com.google.gson.Gson;
 import com.pcdeveloper.darkmovies.BR;
 import com.pcdeveloper.darkmovies.R;
 import com.pcdeveloper.darkmovies.data.models.Movie;
+import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.databinding.ActivityMovieInfosBinding;
 import com.pcdeveloper.darkmovies.di.ViewModelProviderFactory;
 import com.pcdeveloper.darkmovies.ui.base.BaseActivity;
 import com.pcdeveloper.darkmovies.util.Constants;
+import com.pcdeveloper.darkmovies.util.Err;
 
 import javax.inject.Inject;
 
@@ -68,30 +67,66 @@ public class MovieInfosctivity extends BaseActivity<ActivityMovieInfosBinding,Mo
         Toolbar toolbar=getViewDataBinding().toolbar;
        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//activ arrow to back in toolbar
-        toolbar.setTitle("Title");
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void initObservers() {
-        getViewModel().getImage().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                if(s!=null){
-                    Glide.with(getBaseContext())
-                            .load(Constants.BASE_URL_IMG +s)
-                            .placeholder(R.drawable.ic_refresh_24dp)
-                            .error(R.drawable.ic_broken_image_24dp)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(getViewDataBinding().backdropImageview);
-                }
-            }
-        });
+       getViewModel().getMovieInfos().observe(this, new Observer<Movie>() {
+           @Override
+           public void onChanged(Movie movie) {
+               if(movie !=null){
+                   getViewDataBinding().setMovie(movie);
+                   if(movie.getBackdropPath()!=null){
+                       Glide.with(getBaseContext())
+                               .load(Constants.BASE_URL_IMG_M + movie.getBackdropPath())
+                               //.placeholder(R.drawable.ic_refresh_24dp)
+                               .error(R.drawable.ic_broken_image_24dp)
+                               .diskCacheStrategy(DiskCacheStrategy.ALL)
+                               .into(getViewDataBinding().backdropImageview);
+                   }
 
+                  /* if(movie.getPosterPath()!=null){
+                       Glide.with(getBaseContext())
+                               .load(Constants.BASE_URL_IMG_M + movie.getPosterPath())
+                               //.placeholder(R.drawable.ic_refresh_24dp)
+                               .error(R.drawable.ic_broken_image_24dp)
+                               .diskCacheStrategy(DiskCacheStrategy.ALL)
+                               .into(getViewDataBinding().imagePoster);
+
+                   }*/
+               }
+           }
+       });
+
+       getViewModel().getStatus().observe(this, new Observer<String>() {
+           @Override
+           public void onChanged(String s) {
+               if(s!=null && s.length()>0){
+                   Toast.makeText(getBaseContext(),s,Toast.LENGTH_SHORT).show();
+               }
+           }
+       });
+
+       getViewModel().getObserveErr().observe(this, new Observer<Err>() {
+           @Override
+           public void onChanged(Err err) {
+               if(err.getErr()!=null){
+                   Toast.makeText(getBaseContext(),err.getErr(),Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getBaseContext(),err.getT().getMessage(),Toast.LENGTH_SHORT).show();
+               }
+           }
+       });
     }
 
-    private void getArgs() {//pegando informações passas para a view
+    private void getArgs() {//pegando informações passadas para a view
         Intent i=getIntent();
-        getViewModel().setMovieTosee(new Gson().fromJson(i.getStringExtra("movie"),Movie.class));
+        getViewModel().setMovieTosee(i.getLongExtra("movie",-1));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.movie_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

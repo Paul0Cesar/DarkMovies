@@ -5,11 +5,14 @@ import android.util.Log;
 
 import com.pcdeveloper.darkmovies.data.db.DbHelper;
 import com.pcdeveloper.darkmovies.data.models.Movie;
+import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.util.Constants;
+import com.pcdeveloper.darkmovies.util.Methods;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,6 +20,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Singleton
 public class AppApiHelper implements  ApiHelper {
 
     private Context mContext;
@@ -24,14 +28,11 @@ public class AppApiHelper implements  ApiHelper {
     private String BASE_URL= Constants.BASE_URL;
     private String API_KEY=Constants.API_KEY;
     private ApiService mService;
-    private DbHelper dbHelper;
 
-    //https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
-    //http://api.themoviedb.org/3/configuration?api_key=299944006d221f95281489351f1c19fa
+
     @Inject
-    public AppApiHelper(Context mContext, DbHelper dbHelper) {
+    public AppApiHelper(Context mContext) {
         this.mContext = mContext;
-        this.dbHelper=dbHelper;
         startConnection();
     }
 
@@ -48,7 +49,7 @@ public class AppApiHelper implements  ApiHelper {
 
 
     @Override
-    public void getNowPlaying(String language, final int page, final CallBackto callBackto) {
+    public void getNowPlaying(String language, final int page, final CallBackto<PageMovie> callBackto) {
         callBackto.isRefreshing(true);
         if(mService!=null){
             Call<PageMovie> call=this.mService.getNowPlaying(API_KEY,language,page);
@@ -57,30 +58,62 @@ public class AppApiHelper implements  ApiHelper {
                 public void onResponse(Call<PageMovie> call, Response<PageMovie> response) {
                     if(response.isSuccessful()){
                         PageMovie pageMovie=response.body();
-                        if(pageMovie!=null && pageMovie.getMovies()!=null){
-                            if(pageMovie.getMovies()!=null && pageMovie.getMovies().size()>0){
-                                for(Movie e:pageMovie.getMovies()){
-                                    Log.d("Pc","--->"+e.getTitle());
-                                }
+                        if(pageMovie!=null && pageMovie.getPosters()!=null){
+                            if(pageMovie.getPosters()!=null && pageMovie.getPosters().size()>0){
+                                callBackto.result(pageMovie);
                             }else{
-                                Log.d("Pc","--->VAZIO");
+                                callBackto.onErro(Methods.err("getNowPlaying","Erro na Requsição dos Filmes",-1),null);
                             }
                             callBackto.isRefreshing(false);
-                            callBackto.result(pageMovie);
                         }
                     }else{
-                        callBackto.onErro("Erro na requisição dos filmes{1}!",null);
+                        callBackto.onErro(Methods.err("getNowPlaying","Erro na Requsição dos Filmes",response.code()),null);
+                        callBackto.isRefreshing(false);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<PageMovie> call, Throwable t) {
-                    callBackto.onErro("Erro na requisição dos filmes{2}!",t);
+                    callBackto.onErro(Methods.err("getNowPlaying","Erro na Requsição dos Filmes",t.hashCode()),t);
+                    callBackto.isRefreshing(false);
                 }
             });
         }else{//show Erro
-
+            callBackto.onErro(Methods.err("getNowPlaying","Erro no Service {Vazio}",-1),null);
+            callBackto.isRefreshing(false);
         }
+    }
+
+    @Override
+    public void getInfosByMovieId(long movie_id, String language,final CallBackto<Movie>  callBackto) {
+        callBackto.isRefreshing(true);
+        if(mService!=null){
+            Call<Movie>call=mService.getInfosByMovie(movie_id,API_KEY,language);
+            call.enqueue(new Callback<Movie>() {
+                @Override
+                public void onResponse(Call<Movie> call, Response<Movie> response) {
+                    if(response.isSuccessful()){
+                        callBackto.result(response.body());
+                    }else{
+
+                    callBackto.onErro(Methods.err("getInfosByMovieId","Erro na Requsição do Filme",-1),null);
+                    }
+                    callBackto.isRefreshing(false);
+                }
+
+                @Override
+                public void onFailure(Call<Movie> call, Throwable t) {
+                    callBackto.onErro(Methods.err("getInfosByMovieId","Erro na Requsição do Filme",t.hashCode()),t);
+
+                    callBackto.isRefreshing(false);
+
+                }
+            });
+        }else{
+            callBackto.onErro(Methods.err("getInfosByMovieId","Erro no Service {Vazio}",-1),null);
+            callBackto.isRefreshing(false);
+        }
+
     }
 
 

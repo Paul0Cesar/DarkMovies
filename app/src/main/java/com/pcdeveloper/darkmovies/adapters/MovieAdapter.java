@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.pcdeveloper.darkmovies.R;
-import com.pcdeveloper.darkmovies.data.DataManager;
-import com.pcdeveloper.darkmovies.data.models.Movie;
+import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.databinding.AdapterMovieBinding;
 import com.pcdeveloper.darkmovies.util.Constants;
 
@@ -25,7 +23,7 @@ import java.util.ArrayList;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
 
-    private ArrayList<Movie> movies;
+    private ArrayList<Poster> movies;
 
     private Context mContext;
     private onClickListenerAdapter onClick;
@@ -49,11 +47,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Movie currentMovie = movies.get(position);
-        holder.onBind(currentMovie,onClick);
+        Poster currentPoster = movies.get(position);
+        holder.onBind(currentPoster,onClick);
 
         Glide.with(mContext)
-                .load(Constants.BASE_URL_IMG +currentMovie.getPosterPath())
+                .load(Constants.BASE_URL_IMG_P + currentPoster.getPosterPath())
                 .placeholder(R.drawable.ic_refresh_24dp)
                 .error(R.drawable.ic_broken_image_24dp)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -69,8 +67,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
        }
     }
 
-    public void setMovieList(ArrayList<Movie> movies){
-        this.movies=movies;
+    public void setMovieList(ArrayList<Poster> posters){
+        this.movies= posters;
         notifyDataSetChanged();
     }
 
@@ -87,8 +85,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             return this.movieListItemBinding.imageView;
         }
 
-        public void onBind(final Movie movie, final onClickListenerAdapter click){
-            this.movieListItemBinding.setItem(movie);
+        public void onBind(final Poster poster, final onClickListenerAdapter click){
+            this.movieListItemBinding.setItem(poster);
             this.movieListItemBinding.cardViewAdapter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -104,6 +102,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
 
     public interface onClickListenerAdapter{
-        void onClick(Movie e);
+        void onClick(Poster e);
     }
 }

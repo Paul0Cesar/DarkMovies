@@ -12,7 +12,7 @@ public class PageMovie {
     private int numberOfPage;
     @SerializedName("results")
     @Expose
-    private ArrayList<Movie> movies;
+    private ArrayList<Poster> posters;
 
     @SerializedName("total_pages")
     @Expose
@@ -26,17 +26,17 @@ public class PageMovie {
         this.numberOfPage = numberOfPage;
     }
 
-    public ArrayList<Movie> getMovies() {
-        return movies;
+    public ArrayList<Poster> getPosters() {
+        return posters;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
-        this.movies = movies;
+    public void setPosters(ArrayList<Poster> posters) {
+        this.posters = posters;
     }
 
-    public void setAllMovies(ArrayList<Movie> movies){
-        if(movies!=null && movies.size()>0){
-            this.movies.addAll(movies);
+    public void setAllMovies(ArrayList<Poster> posters){
+        if(posters !=null && posters.size()>0){
+            this.posters.addAll(posters);
         }
     }
 

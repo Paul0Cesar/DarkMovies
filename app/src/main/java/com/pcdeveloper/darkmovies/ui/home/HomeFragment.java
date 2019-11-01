@@ -6,17 +6,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.pcdeveloper.darkmovies.BR;
 import com.pcdeveloper.darkmovies.R;
@@ -94,7 +89,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         getViewModel().getMovies().observe(this, new Observer<PageMovie>() {
             @Override
             public void onChanged(PageMovie pageMovie) {
-                mMovieAdapter.setMovieList(pageMovie.getMovies());
+                mMovieAdapter.setMovieList(pageMovie.getPosters());
             }
         });
 
@@ -102,8 +97,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
             @Override
             public void onChanged(String s) {
                 if(s!=null){
-                    String mv=getViewModel().getMovieToSee();
-                    if(mv!=null && mv.length()>0){
+                    long mv=getViewModel().getMovieToSee();
+                    if(mv!=0){
+                        Log.d("Pc","ID(1)---->"+mv);
                         Intent i=new Intent(getContext(), MovieInfosctivity.class);
                         i.putExtra("movie",mv);
                         startActivity(i);

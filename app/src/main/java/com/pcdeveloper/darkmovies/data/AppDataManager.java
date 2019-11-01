@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.pcdeveloper.darkmovies.data.db.DbHelper;
 import com.pcdeveloper.darkmovies.data.db.dao.MovieDao;
+import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.network.ApiHelper;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.data.prefs.PrefsHelper;
@@ -48,4 +49,8 @@ public class AppDataManager  implements DataManager {
     }
 
 
+    @Override
+    public void getInfosByMovieId(long movie_id, String language,CallBackto<Movie> callBackto) {
+        this.mApiHelper.getInfosByMovieId(movie_id,language,callBackto);
+    }
 }

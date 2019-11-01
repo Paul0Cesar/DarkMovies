@@ -1,14 +1,11 @@
 package com.pcdeveloper.darkmovies.ui.home;
 
-import android.util.Log;
-
-import androidx.databinding.Bindable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.pcdeveloper.darkmovies.adapters.MovieAdapter;
 import com.pcdeveloper.darkmovies.data.DataManager;
-import com.pcdeveloper.darkmovies.data.models.Movie;
+import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
@@ -22,7 +19,7 @@ public class HomeViewModel extends BaseViewModel {
    private String LANGUAGE= Constants.LANGUAGE;
    private MutableLiveData<String> mNavigator=new MutableLiveData<>();
    private int flag=0;
-   private Movie toSee;
+   private Poster toSee;
    private String INFOS_MOVIE=Constants.INFOS_MOVIE;
     //val hasError: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -37,8 +34,8 @@ public class HomeViewModel extends BaseViewModel {
     }
     public LiveData<String> getNavigator(){return  mNavigator;}
 
-    public String getMovieToSee(){//retorna o filme que vai ser exibido
-     return toSee.toJson(toSee);
+    public long getMovieToSee(){//retorna o filme que vai ser exibido
+     return toSee.getId();
     }
 
 
@@ -50,8 +47,8 @@ public class HomeViewModel extends BaseViewModel {
 
     public void  onRefreshList(){
         PageMovie pg=this.pageMovies.getValue();
-        if(pg!=null && pg.getMovies()!=null){
-            pg.setMovies(null);
+        if(pg!=null && pg.getPosters()!=null){
+            pg.setPosters(null);
             this.pageMovies.setValue(pg);
         }
         getNowPlaying(LANGUAGE,1);
@@ -65,10 +62,10 @@ public class HomeViewModel extends BaseViewModel {
     }
 
     private void getNowPlaying(String language, final int page){
-        getDataManager().getNowPlaying(language,page, new CallBackto() {
+        getDataManager().getNowPlaying(language,page, new CallBackto<PageMovie>() {
             @Override
             public void isRefreshing(final Boolean refreshing) {
-                if(!refreshing){
+                if(!refreshing){//conferir se por ser um view model vai afetar a thread principal
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -93,10 +90,10 @@ public class HomeViewModel extends BaseViewModel {
 
             @Override
             public void result(PageMovie result) {
-                if(pageMovies!=null && pageMovies.getValue()!=null && pageMovies.getValue().getMovies()!=null){
+                if(pageMovies!=null && pageMovies.getValue()!=null && pageMovies.getValue().getPosters()!=null){
                     PageMovie mPage=pageMovies.getValue();
                     mPage.setNumberOfPage(result.getNumberOfPage());
-                    mPage.setAllMovies(result.getMovies());
+                    mPage.setAllMovies(result.getPosters());
                     pageMovies.postValue(mPage);
                 }else{
                     pageMovies.postValue(result);
@@ -125,7 +122,7 @@ public class HomeViewModel extends BaseViewModel {
     public MovieAdapter.onClickListenerAdapter onClick(){
        return new MovieAdapter.onClickListenerAdapter() {
            @Override
-           public void onClick(Movie e) {
+           public void onClick(Poster e) {
                if(e!=null){
                    toSee=e;
                    mNavigator.postValue(INFOS_MOVIE);

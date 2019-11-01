@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.pcdeveloper.darkmovies.data.models.Movie" />
+            type="com.pcdeveloper.darkmovies.data.models.Poster" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -1,28 +1,34 @@
 package com.pcdeveloper.darkmovies.data.models;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Movie  extends RealmObject {
+public class Movie   {
 
 
-    @PrimaryKey
-    private int id;
+
+    private long id;
 
     @SerializedName("poster_path")
     private String  posterPath;
 
-    private boolean adult;
-
-    private String overview;
-
     @SerializedName("release_date")
     private String releaseDate;
 
-    //private int[] genre_ids;
+    private Boolean adult;
+
+    private ArrayList<Genres> genres;
+
+    @SerializedName("homepage")
+    private String homePage;
+
+    @SerializedName("overview")
+    private String overView;
 
     @SerializedName("original_title")
     private String originalTitle;
@@ -43,13 +49,11 @@ public class Movie  extends RealmObject {
     @SerializedName("vote_average")
     private  float voteAverage;
 
-
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -61,28 +65,44 @@ public class Movie  extends RealmObject {
         this.posterPath = posterPath;
     }
 
-    public boolean isAdult() {
-        return adult;
-    }
-
-    public void setAdult(boolean adult) {
-        this.adult = adult;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
     public String getReleaseDate() {
         return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public Boolean getAdult() {
+        return adult;
+    }
+
+    public void setAdult(Boolean adult) {
+        this.adult = adult;
+    }
+
+    public ArrayList<Genres> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<Genres> genres) {
+        this.genres = genres;
+    }
+
+    public String getHomePage() {
+        return homePage;
+    }
+
+    public void setHomePage(String homePage) {
+        this.homePage = homePage;
+    }
+
+    public String getOverView() {
+        return overView;
+    }
+
+    public void setOverView(String overView) {
+        this.overView = overView;
     }
 
     public String getOriginalTitle() {
@@ -140,13 +160,4 @@ public class Movie  extends RealmObject {
     public void setVoteAverage(float voteAverage) {
         this.voteAverage = voteAverage;
     }
-
-    public String toJson(Movie e){
-        Gson j=new Gson();
-        return  j.toJson(e);
-    }
-
-
-
-
 }

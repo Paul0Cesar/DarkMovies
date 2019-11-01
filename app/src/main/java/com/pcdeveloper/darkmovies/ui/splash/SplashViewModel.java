@@ -6,7 +6,7 @@ import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
 
 public class SplashViewModel extends BaseViewModel {
 
-    //private Movie movie;
+    //private Poster movie;
 
     public SplashViewModel(DataManager dataManager) {
         super(dataManager);
