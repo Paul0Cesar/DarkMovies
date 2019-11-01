@@ -2,7 +2,12 @@ package com.pcdeveloper.darkmovies.data.db;
 
 import android.content.Context;
 
+import com.pcdeveloper.darkmovies.data.db.dao.CastDao;
 import com.pcdeveloper.darkmovies.data.db.dao.MovieDao;
+import com.pcdeveloper.darkmovies.data.models.Cast;
+import com.pcdeveloper.darkmovies.data.models.Movie;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,9 +45,39 @@ public class DbOpenHelper implements DbHelper {
     }
 
     @Override
-    public MovieDao createMovieDao() {
+    public void saveMovie(Movie e) {
         checkIfRealmIsOpen();
-        return new MovieDao(mRealm);
+        MovieDao movieDao= new MovieDao(mRealm);
+    }
+
+    @Override
+    public ArrayList<Movie> getAlLMovies() {
+        checkIfRealmIsOpen();
+        MovieDao movieDao= new MovieDao(mRealm);
+        CastDao castDao=new CastDao(mRealm);
+
+        ArrayList<Movie>result=new ArrayList<>();
+
+        result=movieDao.loadAll();
+        if(result!=null){
+            for(Movie e:result){
+                e.setCasts(castDao.getCastsByMovie(e.getId()));
+            }
+        }
+
+        return result;
+
+    }
+
+    @Override
+    public void delMovie(Movie e) {
+
+    }
+
+    @Override
+    public MovieDao createMovieDao() {
+
+        return new
     }
 
     private void checkIfRealmIsOpen(){

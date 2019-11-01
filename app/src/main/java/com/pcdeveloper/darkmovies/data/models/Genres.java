@@ -1,8 +1,13 @@
 package com.pcdeveloper.darkmovies.data.models;
 
-public class Genres {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
+public class Genres  extends RealmObject {
+
+    @PrimaryKey
     private  int id;
+    private long movie_id;
     private String name;
 
     public int getId() {
@@ -19,5 +24,13 @@ public class Genres {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getMovie_id() {
+        return movie_id;
+    }
+
+    public void setMovie_id(long movie_id) {
+        this.movie_id = movie_id;
     }
 }

@@ -1,5 +1,7 @@
 package com.pcdeveloper.darkmovies.ui.home;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -104,6 +106,7 @@ public class HomeViewModel extends BaseViewModel {
     }
 
 
+
     public RecyclerViewClickListeners.Click getClick(){
         return new RecyclerViewClickListeners.Click() {
             @Override
@@ -118,6 +121,7 @@ public class HomeViewModel extends BaseViewModel {
         };
 
     }
+
 
     public MovieAdapter.onClickListenerAdapter onClick(){
        return new MovieAdapter.onClickListenerAdapter() {

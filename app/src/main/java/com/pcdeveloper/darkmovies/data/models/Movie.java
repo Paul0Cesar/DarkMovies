@@ -5,10 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
-public class Movie   {
+public class Movie  extends RealmObject {
 
 
 
@@ -22,10 +24,12 @@ public class Movie   {
 
     private Boolean adult;
 
+    @Ignore
     private ArrayList<Genres> genres;
 
-    @SerializedName("homepage")
-    private String homePage;
+    @Ignore
+    private ArrayList<Cast>casts;
+
 
     @SerializedName("overview")
     private String overView;
@@ -89,12 +93,12 @@ public class Movie   {
         this.genres = genres;
     }
 
-    public String getHomePage() {
-        return homePage;
+    public ArrayList<Cast> getCasts() {
+        return casts;
     }
 
-    public void setHomePage(String homePage) {
-        this.homePage = homePage;
+    public void setCasts(ArrayList<Cast> casts) {
+        this.casts = casts;
     }
 
     public String getOverView() {

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.pcdeveloper.darkmovies.R;
+import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.databinding.AdapterMovieBinding;
 import com.pcdeveloper.darkmovies.util.Constants;
@@ -49,13 +50,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Poster currentPoster = movies.get(position);
         holder.onBind(currentPoster,onClick);
-
-        Glide.with(mContext)
-                .load(Constants.BASE_URL_IMG_P + currentPoster.getPosterPath())
-                .placeholder(R.drawable.ic_refresh_24dp)
-                .error(R.drawable.ic_broken_image_24dp)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into( holder.getImageView());
     }
 
     @Override
@@ -67,9 +61,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
        }
     }
 
-    public void setMovieList(ArrayList<Poster> posters){
-        this.movies= posters;
-        notifyDataSetChanged();
+    public void setMovieList(PageMovie page){
+        if(page!=null){
+            this.movies= page.getPosters();
+            notifyDataSetChanged();
+        }
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -38,7 +39,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
     MovieAdapter mMovieAdapter;
 
     @Inject
-    RecyclerView.LayoutManager  layoutManager;
+    GridLayoutManager layoutManager;
 
     private HomeViewModel homeViewModel;
 
@@ -86,10 +87,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
     }
 
     private void setObservers() {
+
         getViewModel().getMovies().observe(this, new Observer<PageMovie>() {
             @Override
             public void onChanged(PageMovie pageMovie) {
-                mMovieAdapter.setMovieList(pageMovie.getPosters());
+                mMovieAdapter.setMovieList(pageMovie);
             }
         });
 
@@ -97,13 +99,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
             @Override
             public void onChanged(String s) {
                 if(s!=null){
-                    long mv=getViewModel().getMovieToSee();
-                    if(mv!=0){
-                        Log.d("Pc","ID(1)---->"+mv);
-                        Intent i=new Intent(getContext(), MovieInfosctivity.class);
-                        i.putExtra("movie",mv);
-                        startActivity(i);
-                    }
+                   if(s.equals(Constants.INFOS_MOVIE)){
+                       long mv=getViewModel().getMovieToSee();
+                       if(mv!=0){
+                           Intent i=new Intent(getContext(), MovieInfosctivity.class);
+                           i.putExtra("movie",mv);
+                           startActivity(i);
+                       }
+                   }
 
                 }
             }

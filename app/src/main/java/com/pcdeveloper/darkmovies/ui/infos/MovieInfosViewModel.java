@@ -6,12 +6,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.pcdeveloper.darkmovies.data.DataManager;
+import com.pcdeveloper.darkmovies.data.models.Cast;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
 import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.Err;
+
+import java.util.ArrayList;
 
 public class MovieInfosViewModel extends BaseViewModel {
 
@@ -22,7 +25,7 @@ public class MovieInfosViewModel extends BaseViewModel {
         super(dataManager);
     }
 
-    public void setMovieTosee(long e){
+    public void setMovieTosee(final long e){
         //pegar info
         if(e!=-1){
            getDataManager().getInfosByMovieId(e, Constants.LANGUAGE, new CallBackto<Movie>() {
@@ -32,25 +35,52 @@ public class MovieInfosViewModel extends BaseViewModel {
                        mStatus.setValue("Aguarde...");
                    }
                }
-
                @Override
                public void onErro(String err, Throwable throwable) {
                    Err e=new Err(err,throwable);
-                   Log.d("Pc","Err-->"+err);
                    MovieInfosViewModel.super.mErr.setValue(e);
                }
 
                @Override
                public void result(Movie result) {
-                   Log.d("Pc","Title-->"+result.getTitle());
                    mMovie.setValue(result);
                }
            });
         }else{//erro na passagem de parametros
-
+            Err ex=new Err("{setMovieTosee}Erro na Passagem de Parametros",null);
+            MovieInfosViewModel.super.mErr.setValue(ex);
         }
 
     }
+
+
+    public Boolean isFavorite(){
+        Movie e=mMovie.getValue();
+        if(e!=null){
+            Boolean res=getDataManager().idFavorite(e.getId());
+            saveOrNot(res);
+            return res;
+        }
+        return false;
+    }
+
+    private void saveOrNot(Boolean res) {
+        Movie e=mMovie.getValue();
+        if(res){
+            getDataManager().createMovieDao().save(e);
+        }
+    }
+
+    public void setFavorite(){
+        Movie e=mMovie.getValue();
+        if(e!=null){
+            getDataManager().addFavorites(e.getId());
+            Boolean res=getDataManager().idFavorite(e.getId());
+            saveOrNot(res);
+        }
+    }
+
+
 
     public LiveData<Movie>getMovieInfos(){
         return mMovie;

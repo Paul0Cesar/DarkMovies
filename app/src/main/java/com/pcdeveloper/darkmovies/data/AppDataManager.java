@@ -53,4 +53,14 @@ public class AppDataManager  implements DataManager {
     public void getInfosByMovieId(long movie_id, String language,CallBackto<Movie> callBackto) {
         this.mApiHelper.getInfosByMovieId(movie_id,language,callBackto);
     }
+
+    @Override
+    public void addFavorites(long id) {
+        mPreferencesHelper.addFavorites(id);
+    }
+
+    @Override
+    public Boolean idFavorite(long id) {
+        return mPreferencesHelper.idFavorite(id);
+    }
 }

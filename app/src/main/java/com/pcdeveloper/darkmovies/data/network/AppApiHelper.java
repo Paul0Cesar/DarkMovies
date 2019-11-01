@@ -4,12 +4,16 @@ import android.content.Context;
 import android.util.Log;
 
 import com.pcdeveloper.darkmovies.data.db.DbHelper;
+import com.pcdeveloper.darkmovies.data.models.Cast;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
+import com.pcdeveloper.darkmovies.data.network.webObjects.CastResponse;
 import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.Methods;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -85,7 +89,7 @@ public class AppApiHelper implements  ApiHelper {
     }
 
     @Override
-    public void getInfosByMovieId(long movie_id, String language,final CallBackto<Movie>  callBackto) {
+    public void getInfosByMovieId(final long movie_id, String language, final CallBackto<Movie>  callBackto) {
         callBackto.isRefreshing(true);
         if(mService!=null){
             Call<Movie>call=mService.getInfosByMovie(movie_id,API_KEY,language);
@@ -93,12 +97,10 @@ public class AppApiHelper implements  ApiHelper {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
                     if(response.isSuccessful()){
-                        callBackto.result(response.body());
+                        getCastByMovieId(movie_id,response.body(),callBackto);
                     }else{
-
                     callBackto.onErro(Methods.err("getInfosByMovieId","Erro na Requsição do Filme",-1),null);
                     }
-                    callBackto.isRefreshing(false);
                 }
 
                 @Override
@@ -111,6 +113,38 @@ public class AppApiHelper implements  ApiHelper {
             });
         }else{
             callBackto.onErro(Methods.err("getInfosByMovieId","Erro no Service {Vazio}",-1),null);
+            callBackto.isRefreshing(false);
+        }
+
+    }
+
+    public void getCastByMovieId(long movie_id, final Movie movie, final CallBackto<Movie> callBackto) {
+        if(mService!=null){
+            Call<CastResponse> call=mService.getInfosCredits(movie_id,API_KEY);
+            call.enqueue(new Callback<CastResponse>() {
+                @Override
+                public void onResponse(Call<CastResponse> call, Response<CastResponse> response) {
+                    if(response.isSuccessful()){
+                        CastResponse resp=response.body();
+                        movie.setCasts(resp.getCasts());
+                        callBackto.result(movie);
+                    }else{
+                        callBackto.onErro(Methods.err("getCastByMovieId","Erro na Requsição dos Creditos",-1),null);
+                        callBackto.isRefreshing(false);
+                    }
+                    callBackto.isRefreshing(false);
+                }
+
+                @Override
+                public void onFailure(Call<CastResponse> call, Throwable t) {
+                    Log.d("Pc","Err-->"+t.getMessage());
+                    callBackto.onErro(Methods.err("getCastByMovieId","Erro na Requsição dos Creditos",t.hashCode()),t);
+                    callBackto.isRefreshing(false);
+                }
+            });
+
+        }else{
+            callBackto.onErro(Methods.err("getCastByMovieId","Erro no Service {Vazio}",-1),null);
             callBackto.isRefreshing(false);
         }
 

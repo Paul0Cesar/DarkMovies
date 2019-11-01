@@ -2,6 +2,7 @@ package com.pcdeveloper.darkmovies.di.builder;
 
 
 import com.pcdeveloper.darkmovies.di.module.FragmentModule;
+import com.pcdeveloper.darkmovies.di.module.UtilModule;
 import com.pcdeveloper.darkmovies.ui.fav.FavoriteFragment;
 import com.pcdeveloper.darkmovies.ui.home.HomeFragment;
 import com.pcdeveloper.darkmovies.ui.infos.MovieInfosctivity;
@@ -27,6 +28,6 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {FragmentModule.class})
     abstract MainActivity bindMainActivity();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = UtilModule.class)
     abstract MovieInfosctivity bindMovieInfosctivity();
 }

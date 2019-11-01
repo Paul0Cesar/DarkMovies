@@ -1,8 +1,11 @@
 package com.pcdeveloper.darkmovies.data.network;
 
+import com.pcdeveloper.darkmovies.data.models.Cast;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
+
+import java.util.ArrayList;
 
 public interface ApiHelper {
 
@@ -10,4 +13,5 @@ public interface ApiHelper {
     void  getNowPlaying(String language, int page,  CallBackto<PageMovie> callBackto);
 
     void getInfosByMovieId (long movie_id,String language, CallBackto<Movie> callBackto);
+
 }
