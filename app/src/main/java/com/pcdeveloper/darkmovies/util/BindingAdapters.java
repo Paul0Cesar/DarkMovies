@@ -5,9 +5,7 @@ import android.content.res.ColorStateList;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,14 +14,12 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.pcdeveloper.darkmovies.R;
 import com.pcdeveloper.darkmovies.adapters.CastAdapter;
-import com.pcdeveloper.darkmovies.adapters.FavAdapter;
+import com.pcdeveloper.darkmovies.adapters.MvAdapter;
 import com.pcdeveloper.darkmovies.adapters.MovieAdapter;
 import com.pcdeveloper.darkmovies.data.models.Cast;
 import com.pcdeveloper.darkmovies.data.models.Genres;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
-import com.pcdeveloper.darkmovies.data.models.Poster;
-import com.pcdeveloper.darkmovies.ui.home.HomeViewModel;
 
 import java.util.ArrayList;
 /*
@@ -58,7 +54,7 @@ public class BindingAdapters {
     public  static void AddMoviesItensFav(RecyclerView view, ArrayList<Movie> movies){
         if(view!=null){
             if(movies!=null){
-                FavAdapter adapter= (FavAdapter) view.getAdapter();
+                MvAdapter adapter= (MvAdapter) view.getAdapter();
                 if(adapter!=null){
                     adapter.setMovieList(movies);
                 }

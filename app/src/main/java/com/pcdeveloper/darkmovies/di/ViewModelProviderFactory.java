@@ -11,6 +11,7 @@ import com.pcdeveloper.darkmovies.ui.infos.MovieInfosViewModel;
 import com.pcdeveloper.darkmovies.ui.infos.MovieInfosctivity;
 import com.pcdeveloper.darkmovies.ui.main.MainActivity;
 import com.pcdeveloper.darkmovies.ui.main.MainViewModel;
+import com.pcdeveloper.darkmovies.ui.search.SearchViewModel;
 import com.pcdeveloper.darkmovies.ui.splash.SplashViewModel;
 
 import javax.inject.Inject;
@@ -43,6 +44,8 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return  (T) new MovieInfosViewModel(dataManager);
         }else if(modelClass.isAssignableFrom(FavViewModel.class)){
             return (T)new FavViewModel(dataManager);
+        }else if(modelClass.isAssignableFrom(SearchViewModel.class)){
+            return (T) new SearchViewModel(dataManager);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

@@ -68,6 +68,11 @@ public class AppDataManager  implements DataManager {
     }
 
     @Override
+    public void searchMovies(String key, CallBackto<ArrayList<Movie>> callBackto) {
+        mApiHelper.searchMovies(key,callBackto);
+    }
+
+    @Override
     public void addFavorites(long id) {
         mPreferencesHelper.addFavorites(id);
     }

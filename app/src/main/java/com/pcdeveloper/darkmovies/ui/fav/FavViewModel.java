@@ -1,14 +1,11 @@
 package com.pcdeveloper.darkmovies.ui.fav;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.pcdeveloper.darkmovies.adapters.FavAdapter;
+import com.pcdeveloper.darkmovies.adapters.MvAdapter;
 import com.pcdeveloper.darkmovies.data.DataManager;
 import com.pcdeveloper.darkmovies.data.models.Movie;
-import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
 import com.pcdeveloper.darkmovies.util.Constants;
 
@@ -49,8 +46,8 @@ public class FavViewModel extends BaseViewModel {
 
 
 
-    public FavAdapter.onClickListenerAdapter onClick(){
-        return new FavAdapter.onClickListenerAdapter() {
+    public MvAdapter.onClickListenerAdapter onClick(){
+        return new MvAdapter.onClickListenerAdapter() {
             @Override
             public void onClick(Movie e) {
                 if(e!=null){

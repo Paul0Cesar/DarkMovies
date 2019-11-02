@@ -5,6 +5,7 @@ import com.pcdeveloper.darkmovies.data.models.Cast;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.webObjects.CastResponse;
+import com.pcdeveloper.darkmovies.data.network.webObjects.SearchResult;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,9 @@ public interface ApiService {
 
     @GET("movie/{movie_id}/credits")
     Call<CastResponse>getInfosCredits(@Path("movie_id") long movie_id, @Query("api_key") String api_key);
+
+    @GET("search/movie")
+    Call<SearchResult>searchMovie(@Query("api_key") String api_key, @Query("query") String key);
 
 
 }

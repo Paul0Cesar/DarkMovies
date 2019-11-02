@@ -13,11 +13,11 @@ import com.pcdeveloper.darkmovies.databinding.AdapterFavBinding;
 
 import java.util.ArrayList;
 
-public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
+public class MvAdapter extends RecyclerView.Adapter<MvAdapter.MyViewHolder> {
 
     private ArrayList<Movie>mMovies;
     private Context mContext;
-    private FavAdapter.onClickListenerAdapter onClick;
+    private MvAdapter.onClickListenerAdapter onClick;
 
     @NonNull
     @Override
@@ -44,7 +44,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void onClickListener(FavAdapter.onClickListenerAdapter onClickListenerAdapter){
+    public void onClickListener(MvAdapter.onClickListenerAdapter onClickListenerAdapter){
         this.onClick=onClickListenerAdapter;
     }
 
@@ -65,7 +65,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
             this.adapterFavBinding=itemView;
         }
 
-        public void bind(Movie e, final FavAdapter.onClickListenerAdapter onClick){
+        public void bind(Movie e, final MvAdapter.onClickListenerAdapter onClick){
             if(e!=null){
                 adapterFavBinding.setItem(e);
                 adapterFavBinding.linearFav.setOnClickListener(new View.OnClickListener() {

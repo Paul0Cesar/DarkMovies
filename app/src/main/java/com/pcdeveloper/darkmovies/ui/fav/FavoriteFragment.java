@@ -8,20 +8,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.pcdeveloper.darkmovies.BR;
 import com.pcdeveloper.darkmovies.R;
-import com.pcdeveloper.darkmovies.adapters.FavAdapter;
+import com.pcdeveloper.darkmovies.adapters.MvAdapter;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.databinding.FragmentFavoriteBinding;
 import com.pcdeveloper.darkmovies.di.ViewModelProviderFactory;
@@ -43,7 +40,7 @@ public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding,FavVi
     ViewModelProviderFactory factory;
 
     @Inject
-    FavAdapter mAdapter;
+    MvAdapter mAdapter;
 
     @Override
     public int getBindingVariable() {

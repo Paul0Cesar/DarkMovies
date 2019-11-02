@@ -14,4 +14,6 @@ public interface ApiHelper {
 
     void getInfosByMovieId (long movie_id,String language, CallBackto<Movie> callBackto);
 
+    void searchMovies(String key,CallBackto<ArrayList<Movie>> callBackto);
+
 }

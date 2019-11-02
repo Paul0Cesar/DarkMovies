@@ -10,6 +10,7 @@ import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.data.network.webObjects.CastResponse;
+import com.pcdeveloper.darkmovies.data.network.webObjects.SearchResult;
 import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.Methods;
 
@@ -116,6 +117,30 @@ public class AppApiHelper implements  ApiHelper {
             callBackto.isRefreshing(false);
         }
 
+    }
+
+    @Override
+    public void searchMovies(String key, final CallBackto<ArrayList<Movie>> callBackto) {
+        if(mService!=null){
+            Call<SearchResult>call=mService.searchMovie(API_KEY,key);
+            call.enqueue(new Callback<SearchResult>() {
+                @Override
+                public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
+                    if(response.isSuccessful()){
+                        callBackto.result(response.body().getMovies());
+                    }else{
+                        callBackto.onErro(Methods.err("searchMovies","Erro na Requsição dos Filmes",-1),null);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SearchResult> call, Throwable t) {
+                    callBackto.onErro(Methods.err("searchMovies","Erro na Requsição dos Filmes",t.hashCode()),t);
+                }
+            });
+        }else{
+            callBackto.onErro(Methods.err("searchMovies","Erro no Service {Vazio}",-1),null);
+        }
     }
 
     public void getCastByMovieId(long movie_id, final Movie movie, final CallBackto<Movie> callBackto) {
