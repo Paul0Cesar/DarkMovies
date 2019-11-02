@@ -7,11 +7,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.pcdeveloper.darkmovies.adapters.MovieAdapter;
 import com.pcdeveloper.darkmovies.data.DataManager;
+import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
 import com.pcdeveloper.darkmovies.util.Constants;
+import com.pcdeveloper.darkmovies.util.Err;
 import com.pcdeveloper.darkmovies.util.RecyclerViewClickListeners;
 
 public class HomeViewModel extends BaseViewModel {
@@ -87,7 +89,8 @@ public class HomeViewModel extends BaseViewModel {
 
             @Override
             public void onErro(String err, Throwable throwable) {
-                //mostrar erro
+                Err e=new Err(err,throwable);
+                HomeViewModel.super.mErr.setValue(e);
             }
 
             @Override

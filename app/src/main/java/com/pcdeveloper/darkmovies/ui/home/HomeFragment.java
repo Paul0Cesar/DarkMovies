@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.pcdeveloper.darkmovies.BR;
 import com.pcdeveloper.darkmovies.R;
@@ -23,6 +24,7 @@ import com.pcdeveloper.darkmovies.di.ViewModelProviderFactory;
 import com.pcdeveloper.darkmovies.ui.base.BaseFragment;
 import com.pcdeveloper.darkmovies.ui.infos.MovieInfosctivity;
 import com.pcdeveloper.darkmovies.util.Constants;
+import com.pcdeveloper.darkmovies.util.Err;
 import com.pcdeveloper.darkmovies.util.RecyclerViewClickListeners;
 
 import javax.inject.Inject;
@@ -108,6 +110,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
                        }
                    }
 
+                }
+            }
+        });
+
+        getViewModel().getObserveErr().observe(this, new Observer<Err>() {
+            @Override
+            public void onChanged(Err err) {
+                if(err.getErr()!=null){
+                    Toast.makeText(getContext(),err.getErr(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),err.getT().getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
         });

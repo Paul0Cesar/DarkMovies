@@ -59,8 +59,10 @@ public class MovieInfosViewModel extends BaseViewModel {
         if(e!=null){
             Boolean res=getDataManager().isFavorite(e.getId());
             return res;
+        }else{
+            return false;
         }
-        return false;
+
     }
 
     private void saveOrDel(Boolean res) {

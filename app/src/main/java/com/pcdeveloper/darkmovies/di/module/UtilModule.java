@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pcdeveloper.darkmovies.adapters.CastAdapter;
+import com.pcdeveloper.darkmovies.adapters.FavAdapter;
 import com.pcdeveloper.darkmovies.adapters.MovieAdapter;
 import com.pcdeveloper.darkmovies.data.AppDataManager;
 import com.pcdeveloper.darkmovies.data.DataManager;
@@ -29,6 +30,9 @@ public class UtilModule {
     CastAdapter provideCastAdapter(){
         return new CastAdapter();
     }
+
+    @Provides
+    FavAdapter providesFavAdapter(){return new FavAdapter();}
 
     @Provides
     GridLayoutManager  provideGridLayout(MainActivity activity){

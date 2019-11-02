@@ -85,11 +85,14 @@ public class MovieInfosctivity extends BaseActivity<ActivityMovieInfosBinding,Mo
     }
 
     private void initObservers() {
+
+
        getViewModel().getMovieInfos().observe(this, new Observer<Movie>() {
            @Override
            public void onChanged(Movie movie) {
                if(movie !=null){
                    getViewDataBinding().setMovie(movie);
+                   invalidateOptionsMenu();
                }
            }
        });

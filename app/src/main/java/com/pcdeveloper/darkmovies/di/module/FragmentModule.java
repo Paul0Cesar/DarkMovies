@@ -1,5 +1,6 @@
 package com.pcdeveloper.darkmovies.di.module;
 
+import com.pcdeveloper.darkmovies.ui.fav.FavoriteFragment;
 import com.pcdeveloper.darkmovies.ui.home.HomeFragment;
 
 import dagger.Module;
@@ -10,4 +11,8 @@ public  abstract class FragmentModule {
 
     @ContributesAndroidInjector(modules = UtilModule.class)
     abstract HomeFragment provideHomeFragmentFactory();
+
+
+    @ContributesAndroidInjector(modules = UtilModule.class)
+    abstract FavoriteFragment provideFavoriteFragmentFactory();
 }

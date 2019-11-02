@@ -55,7 +55,11 @@ public class MovieDao extends Dao implements DaoCrud<Movie> {
 
     public ArrayList<Movie> loadAll() {
         List<Movie> mv=super.mRealm.where(Movie.class).findAll();
-        return (ArrayList<Movie>) mv;
+        ArrayList<Movie>movies=new ArrayList<>();
+        for(Movie e:mv){
+            movies.add(e);
+        }
+        return  movies;
     }
 
     public Boolean findById(long id) {

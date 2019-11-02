@@ -16,6 +16,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.pcdeveloper.darkmovies.R;
 import com.pcdeveloper.darkmovies.adapters.CastAdapter;
+import com.pcdeveloper.darkmovies.adapters.FavAdapter;
 import com.pcdeveloper.darkmovies.adapters.MovieAdapter;
 import com.pcdeveloper.darkmovies.data.models.Cast;
 import com.pcdeveloper.darkmovies.data.models.Genres;
@@ -47,6 +48,19 @@ public class BindingAdapters {
                 MovieAdapter adapter= (MovieAdapter) view.getAdapter();
                 if(adapter!=null){
                     adapter.setMovieList(pageMovie);
+                }
+            }
+        }
+
+    }
+
+    @BindingAdapter("adapterFav")
+    public  static void AddMoviesItensFav(RecyclerView view, ArrayList<Movie> movies){
+        if(view!=null){
+            if(movies!=null){
+                FavAdapter adapter= (FavAdapter) view.getAdapter();
+                if(adapter!=null){
+                    adapter.setMovieList(movies);
                 }
             }
         }

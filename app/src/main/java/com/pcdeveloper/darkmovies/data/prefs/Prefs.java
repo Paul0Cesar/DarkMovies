@@ -2,6 +2,7 @@ package com.pcdeveloper.darkmovies.data.prefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -30,9 +31,9 @@ public class Prefs implements PrefsHelper {
                 fav=fav.replace(id+";","");
                 ed.putString(KEY_FAVORYTES, fav);
             }
-
         }else{
-            String nova2=id+";";
+            String nova2="";
+            nova2=nova2+id+";";
             ed.putString(KEY_FAVORYTES, nova2);
         }
         ed.apply();

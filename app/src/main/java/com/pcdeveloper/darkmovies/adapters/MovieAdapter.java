@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.pcdeveloper.darkmovies.R;
+import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.databinding.AdapterMovieBinding;
@@ -20,6 +21,11 @@ import com.pcdeveloper.darkmovies.util.Constants;
 
 import java.util.ArrayList;
 
+/*
+Poderia ter usado o mesmo adapter para exibição dos favoritos e dos novos filmes,contudo o fiz separado
+
+Como?No onCreateViewHolder trocar o layout que ira ser inflado dependendo da view
+ */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
@@ -48,8 +54,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Poster currentPoster = movies.get(position);
-        holder.onBind(currentPoster,onClick);
+       if(movies!=null){
+           Poster currentPoster = movies.get(position);
+           holder.onBind(currentPoster,onClick);
+       }
     }
 
     @Override
