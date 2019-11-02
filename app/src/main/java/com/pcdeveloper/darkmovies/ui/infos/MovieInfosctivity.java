@@ -140,6 +140,7 @@ public class MovieInfosctivity extends BaseActivity<ActivityMovieInfosBinding,Mo
                 return true;
             case R.id.like_btn:
                 getViewModel().setFavorite();
+                invalidateOptionsMenu();
         }
         return super.onOptionsItemSelected(item);
     }

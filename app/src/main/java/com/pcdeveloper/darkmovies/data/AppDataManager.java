@@ -9,6 +9,8 @@ import com.pcdeveloper.darkmovies.data.network.ApiHelper;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.data.prefs.PrefsHelper;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 public class AppDataManager  implements DataManager {
@@ -44,9 +46,20 @@ public class AppDataManager  implements DataManager {
     }
 
     @Override
-    public MovieDao createMovieDao() {
-        return mDbHelper.createMovieDao();
+    public void saveMovie(Movie e) {
+        mDbHelper.saveMovie(e);
     }
+
+    @Override
+    public ArrayList<Movie> getAlLMovies() {
+        return mDbHelper.getAlLMovies();
+    }
+
+    @Override
+    public void delMovie(Movie e) {
+        mDbHelper.delMovie(e);
+    }
+
 
 
     @Override
@@ -60,7 +73,7 @@ public class AppDataManager  implements DataManager {
     }
 
     @Override
-    public Boolean idFavorite(long id) {
-        return mPreferencesHelper.idFavorite(id);
+    public Boolean isFavorite(long id) {
+        return mPreferencesHelper.isFavorite(id);
     }
 }

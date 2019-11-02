@@ -40,14 +40,18 @@ public class Prefs implements PrefsHelper {
     }
 
     @Override
-    public Boolean idFavorite(long id) {
+    public Boolean isFavorite(long id) {
         if(mPrefs.contains(KEY_FAVORYTES)){
             String fav=mPrefs.getString(KEY_FAVORYTES,null);
-            if(!(fav.contains(id+""))){
-                return false;
-            }else{
-                return true;
-            }
+           if(fav!=null){
+               if(!(fav.contains(id+""))){
+                   return false;
+               }else{
+                   return true;
+               }
+           }else{
+               return false;
+           }
         }else{
             return false;
         }

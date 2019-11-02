@@ -57,17 +57,18 @@ public class MovieInfosViewModel extends BaseViewModel {
     public Boolean isFavorite(){
         Movie e=mMovie.getValue();
         if(e!=null){
-            Boolean res=getDataManager().idFavorite(e.getId());
-            saveOrNot(res);
+            Boolean res=getDataManager().isFavorite(e.getId());
             return res;
         }
         return false;
     }
 
-    private void saveOrNot(Boolean res) {
+    private void saveOrDel(Boolean res) {
         Movie e=mMovie.getValue();
         if(res){
-            getDataManager().createMovieDao().save(e);
+            getDataManager().saveMovie(e);
+        }else{
+            getDataManager().delMovie(e);
         }
     }
 
@@ -75,8 +76,8 @@ public class MovieInfosViewModel extends BaseViewModel {
         Movie e=mMovie.getValue();
         if(e!=null){
             getDataManager().addFavorites(e.getId());
-            Boolean res=getDataManager().idFavorite(e.getId());
-            saveOrNot(res);
+            Boolean res=getDataManager().isFavorite(e.getId());
+            saveOrDel(res);
         }
     }
 

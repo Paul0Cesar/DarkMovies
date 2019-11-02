@@ -53,9 +53,23 @@ public class CastDao extends Dao implements DaoCrud<Cast> {
         return null;
     }
 
+    public Boolean findById(long id) {
+        Cast mv=super.mRealm.where(Cast.class).equalTo("id",id).findFirst();
+        if(mv!=null){
+            return  true;
+        }else{
+            return  false;
+        }
+    }
     @Override
-    public void remove(@NonNull Cast object) {
-
+    public void remove(@NonNull final Cast object) {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Cast mv=realm.where(Cast.class).equalTo("id",object.getId()).findFirst();
+                mv.deleteFromRealm();
+            }
+        });
     }
 
     @Override

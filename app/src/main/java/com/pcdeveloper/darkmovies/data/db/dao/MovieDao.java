@@ -48,13 +48,17 @@ public class MovieDao extends Dao implements DaoCrud<Movie> {
         return mv;
     }
 
+    @Override
+    public Boolean findById(int id) {
+        return null;
+    }
+
     public ArrayList<Movie> loadAll() {
         List<Movie> mv=super.mRealm.where(Movie.class).findAll();
         return (ArrayList<Movie>) mv;
     }
 
-    @Override
-    public Boolean findById(int id) {
+    public Boolean findById(long id) {
         Movie mv=super.mRealm.where(Movie.class).equalTo("id",id).findFirst();
         if(mv!=null){
             return  true;
@@ -69,7 +73,8 @@ public class MovieDao extends Dao implements DaoCrud<Movie> {
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                object.deleteFromRealm();
+                Movie mv=realm.where(Movie.class).equalTo("id",object.getId()).findFirst();
+                mv.deleteFromRealm();
             }
         });
 

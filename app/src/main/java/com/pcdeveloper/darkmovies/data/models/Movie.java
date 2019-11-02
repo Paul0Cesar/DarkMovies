@@ -14,6 +14,7 @@ public class Movie  extends RealmObject {
 
 
 
+    @PrimaryKey
     private long id;
 
     @SerializedName("poster_path")
