@@ -1,20 +1,17 @@
 package com.pcdeveloper.darkmovies.ui.infos;
 
-import android.util.Log;
+
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.pcdeveloper.darkmovies.data.DataManager;
-import com.pcdeveloper.darkmovies.data.models.Cast;
 import com.pcdeveloper.darkmovies.data.models.Movie;
-import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
 import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.Err;
 
-import java.util.ArrayList;
+
 
 public class MovieInfosViewModel extends BaseViewModel {
 
@@ -25,7 +22,7 @@ public class MovieInfosViewModel extends BaseViewModel {
         super(dataManager);
     }
 
-    public void setMovieTosee(final long e){
+     void setMovieTosee(final long e){
         //pegar info
         if(e!=-1){
            getDataManager().getInfosByMovieId(e, Constants.LANGUAGE, new CallBackto<Movie>() {
@@ -54,11 +51,10 @@ public class MovieInfosViewModel extends BaseViewModel {
     }
 
 
-    public Boolean isFavorite(){
+     Boolean isFavorite(){
         Movie e=mMovie.getValue();
         if(e!=null){
-            Boolean res=getDataManager().isFavorite(e.getId());
-            return res;
+            return getDataManager().isFavorite(e.getId());
         }else{
             return false;
         }
@@ -74,7 +70,7 @@ public class MovieInfosViewModel extends BaseViewModel {
         }
     }
 
-    public void setFavorite(){
+     void setFavorite(){
         Movie e=mMovie.getValue();
         if(e!=null){
             getDataManager().addFavorites(e.getId());
@@ -85,10 +81,10 @@ public class MovieInfosViewModel extends BaseViewModel {
 
 
 
-    public LiveData<Movie>getMovieInfos(){
+     LiveData<Movie>getMovieInfos(){
         return mMovie;
     }
-    public LiveData<String>getStatus(){return mStatus;}
+     LiveData<String>getStatus(){return mStatus;}
 
 
 }

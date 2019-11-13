@@ -1,8 +1,6 @@
 package com.pcdeveloper.darkmovies.ui.base;
 
 import android.os.Bundle;
-import android.util.Log;
-
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

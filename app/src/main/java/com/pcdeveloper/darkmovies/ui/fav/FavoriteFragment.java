@@ -34,7 +34,7 @@ import javax.inject.Inject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding,FavViewModel> {
+public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding, FavViewModel> {
 
     @Inject
     ViewModelProviderFactory factory;
@@ -54,8 +54,7 @@ public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding,FavVi
 
     @Override
     public FavViewModel getViewModel() {
-        FavViewModel favViewModel= ViewModelProviders.of(this,factory).get(FavViewModel.class);
-        return favViewModel;
+        return ViewModelProviders.of(this, factory).get(FavViewModel.class);
     }
 
     @Override
@@ -83,12 +82,12 @@ public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding,FavVi
         getViewModel().getNavigator().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                if(s!=null){
-                    if(s.equals(Constants.INFOS_MOVIE)){
-                        long mv=getViewModel().getMovieToSee();
-                        if(mv!=0){
-                            Intent i=new Intent(getContext(), MovieInfosctivity.class);
-                            i.putExtra("movie",mv);
+                if (s != null) {
+                    if (s.equals(Constants.INFOS_MOVIE)) {
+                        long mv = getViewModel().getMovieToSee();
+                        if (mv != 0) {
+                            Intent i = new Intent(getContext(), MovieInfosctivity.class);
+                            i.putExtra("movie", mv);
                             startActivity(i);
 
                         }
@@ -100,9 +99,9 @@ public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding,FavVi
     }
 
     private void initRecycler() {
-        RecyclerView recyclerView=getDataBinding().recyclerFav;
+        RecyclerView recyclerView = getDataBinding().recyclerFav;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getBaseContext(), LinearLayout.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getBaseActiviy(), LinearLayout.VERTICAL));
         mAdapter.onClickListener(getViewModel().onClick());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);

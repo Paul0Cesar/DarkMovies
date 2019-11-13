@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -39,7 +37,7 @@ import javax.inject.Inject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends BaseFragment<FragmentSearchBinding,SearchViewModel> {
+public class SearchFragment extends BaseFragment<FragmentSearchBinding, SearchViewModel> {
 
 
     @Inject
@@ -60,8 +58,7 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding,SearchVie
 
     @Override
     public SearchViewModel getViewModel() {
-        SearchViewModel searchViewModel= ViewModelProviders.of(this,factory).get(SearchViewModel.class);
-        return searchViewModel;
+        return ViewModelProviders.of(this, factory).get(SearchViewModel.class);
     }
 
     @Override
@@ -74,16 +71,16 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding,SearchVie
     }
 
     private void initRecycler() {
-        RecyclerView recyclerView=getDataBinding().recyclerResults;
+        RecyclerView recyclerView = getDataBinding().recyclerResults;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getBaseContext(), LinearLayout.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getBaseActiviy(), LinearLayout.VERTICAL));
         mAdapter.onClickListener(getViewModel().onClick());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
     }
 
     private void initSearch() {
-        SearchView searchView=getDataBinding().searchView;
+        SearchView searchView = getDataBinding().searchView;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -110,12 +107,12 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding,SearchVie
         getViewModel().getNavigator().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                if(s!=null){
-                    if(s.equals(Constants.INFOS_MOVIE)){
-                        long mv=getViewModel().getMovieToSee();
-                        if(mv!=0){
-                            Intent i=new Intent(getContext(), MovieInfosctivity.class);
-                            i.putExtra("movie",mv);
+                if (s != null) {
+                    if (s.equals(Constants.INFOS_MOVIE)) {
+                        long mv = getViewModel().getMovieToSee();
+                        if (mv != 0) {
+                            Intent i = new Intent(getContext(), MovieInfosctivity.class);
+                            i.putExtra("movie", mv);
                             startActivity(i);
 
                         }
@@ -128,10 +125,10 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding,SearchVie
         getViewModel().getObserveErr().observe(this, new Observer<Err>() {
             @Override
             public void onChanged(Err err) {
-                if(err.getErr()!=null){
-                    Toast.makeText(getContext(),err.getErr(),Toast.LENGTH_SHORT).show();
-                    if(err.getT().getMessage()!=null){
-                        Toast.makeText(getContext(),err.getT().getMessage(),Toast.LENGTH_SHORT).show();
+                if (err.getErr() != null) {
+                    Toast.makeText(getContext(), err.getErr(), Toast.LENGTH_SHORT).show();
+                    if (err.getT().getMessage() != null) {
+                        Toast.makeText(getContext(), err.getT().getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 }

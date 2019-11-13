@@ -5,7 +5,9 @@
     tools:context=".ui.main.MainActivity">
 
     <data>
+
         <import type="android.view.View"></import>
+
         <variable
             name="viewModel"
             type="com.pcdeveloper.darkmovies.ui.main.MainViewModel" />
@@ -38,7 +40,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/main_menu" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

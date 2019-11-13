@@ -12,10 +12,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
-import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
 
-public abstract class BaseFragment<T extends ViewDataBinding,V extends BaseViewModel> extends Fragment {
+public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment {
 
     private BaseActivity mActivity;
     private View mView;
@@ -23,15 +22,18 @@ public abstract class BaseFragment<T extends ViewDataBinding,V extends BaseViewM
     private V mViewModel;
 
     public abstract int getBindingVariable();
-    public abstract  @LayoutRes int getLayoutId();
+
+    public abstract @LayoutRes
+    int getLayoutId();
+
     public abstract V getViewModel();
 
 
-    public  BaseActivity getBaseActiviy(){
-        return  mActivity;
+    public BaseActivity getBaseActiviy() {
+        return mActivity;
     }
 
-    public T getDataBinding(){
+    protected T getDataBinding() {
         return mDataBinding;
     }
 
@@ -39,7 +41,7 @@ public abstract class BaseFragment<T extends ViewDataBinding,V extends BaseViewM
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mDataBinding.setVariable(getBindingVariable(),mViewModel);
+        mDataBinding.setVariable(getBindingVariable(), mViewModel);
         mDataBinding.setLifecycleOwner(this);
         mDataBinding.executePendingBindings();
     }
@@ -47,16 +49,16 @@ public abstract class BaseFragment<T extends ViewDataBinding,V extends BaseViewM
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       mDataBinding= DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
-       mView=mDataBinding.getRoot();
-       return mView;
+        mDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+        mView = mDataBinding.getRoot();
+        return mView;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidSupportInjection.inject(this);
         super.onCreate(savedInstanceState);
-        mViewModel=getViewModel();
+        mViewModel = getViewModel();
         setHasOptionsMenu(false);//Atualiza para o novo menu yes/no
     }
 }

@@ -10,8 +10,6 @@ public class MainViewModel extends BaseViewModel {
 
     }
 
-    public void navclick(){
 
-    }
 
 }

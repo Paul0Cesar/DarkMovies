@@ -1,10 +1,8 @@
 package com.pcdeveloper.darkmovies.ui.main;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
@@ -25,14 +23,13 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding,MainViewModel>  implements HasSupportFragmentInjector {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements HasSupportFragmentInjector {
 
     @Inject
-    DispatchingAndroidInjector<Fragment>fragmentDispatchingAndroidInjector;
+    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
     @Inject
     ViewModelProviderFactory factory;
-    private MainViewModel mainViewModel;
 
     @Override
     public int getBindingVariable() {
@@ -46,8 +43,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding,MainViewModel
 
     @Override
     public MainViewModel getViewModel() {
-        mainViewModel= ViewModelProviders.of(this,factory).get(MainViewModel.class);
-        return mainViewModel;
+        return ViewModelProviders.of(this, factory).get(MainViewModel.class);
     }
 
     @Override
@@ -56,7 +52,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding,MainViewModel
 
         navInit();
     }
-
 
 
     private void navInit() {//Ativa o menu inferior para navegação entre os fragmentos

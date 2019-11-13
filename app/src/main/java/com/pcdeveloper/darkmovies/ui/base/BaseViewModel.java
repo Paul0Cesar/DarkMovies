@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel;
 import com.pcdeveloper.darkmovies.data.DataManager;
 import com.pcdeveloper.darkmovies.util.Err;
 
-import javax.inject.Inject;
-
 public abstract class BaseViewModel extends ViewModel {
 
 
@@ -24,7 +22,7 @@ public abstract class BaseViewModel extends ViewModel {
     }
 
 
-    public DataManager getDataManager() {
+    protected DataManager getDataManager() {
         return dataManager;
     }
 

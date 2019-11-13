@@ -9,9 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,25 +28,19 @@ import com.pcdeveloper.darkmovies.util.RecyclerViewClickListeners;
 import javax.inject.Inject;
 
 
-public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel> {
-
+public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> {
 
 
     @Inject
     ViewModelProviderFactory factory;
 
-   @Inject
+    @Inject
     MovieAdapter mMovieAdapter;
 
     @Inject
     GridLayoutManager layoutManager;
 
     private HomeViewModel homeViewModel;
-
-    private RecyclerView mRecyclerView;
-
-    private String INFOS_MOVIE= Constants.INFOS_MOVIE;
-
 
 
     @Override
@@ -63,10 +55,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
 
     @Override
     public HomeViewModel getViewModel() {
-        homeViewModel= ViewModelProviders.of(this,factory).get(HomeViewModel.class);
+        homeViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
         return homeViewModel;
     }
-
 
 
     @Override
@@ -79,13 +70,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
     }
 
     private void initRecyclerView() {
-        mRecyclerView = getDataBinding().recyclerMovies;
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
+        getDataBinding().recyclerMovies.setLayoutManager(layoutManager);
+        getDataBinding().recyclerMovies.setHasFixedSize(true);
         mMovieAdapter.onClickListener(getViewModel().onClick());
-        mRecyclerView.setAdapter(mMovieAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerViewClickListeners(getViewModel().getClick()));
-
+        getDataBinding().recyclerMovies.setAdapter(mMovieAdapter);
+        getDataBinding().recyclerMovies.addOnScrollListener(new RecyclerViewClickListeners(getViewModel().getClick()));
     }
 
     private void setObservers() {
@@ -100,15 +89,15 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         getViewModel().getNavigator().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                if(s!=null){
-                   if(s.equals(Constants.INFOS_MOVIE)){
-                       long mv=getViewModel().getMovieToSee();
-                       if(mv!=0){
-                           Intent i=new Intent(getContext(), MovieInfosctivity.class);
-                           i.putExtra("movie",mv);
-                           startActivity(i);
-                       }
-                   }
+                if (s != null) {
+                    if (s.equals(Constants.INFOS_MOVIE)) {
+                        long mv = getViewModel().getMovieToSee();
+                        if (mv != 0) {
+                            Intent i = new Intent(getContext(), MovieInfosctivity.class);
+                            i.putExtra("movie", mv);
+                            startActivity(i);
+                        }
+                    }
 
                 }
             }
@@ -117,9 +106,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         getViewModel().getObserveErr().observe(this, new Observer<Err>() {
             @Override
             public void onChanged(Err err) {
-                if(err.getErr()!=null){
-                    Toast.makeText(getContext(),err.getErr(),Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getContext(),err.getT().getMessage(),Toast.LENGTH_SHORT).show();
+                if (err.getErr() != null) {
+                    Toast.makeText(getContext(), err.getErr(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), err.getT().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

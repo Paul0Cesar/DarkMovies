@@ -35,47 +35,42 @@ agora esta todo aqui e pode ser reaproveitado .
 public class BindingAdapters {
 
 
-
-
     @BindingAdapter("adapter")
-    public  static void AddMoviesItens(RecyclerView view, PageMovie pageMovie){
-        if(view!=null){
-            if(pageMovie!=null){
-                MovieAdapter adapter= (MovieAdapter) view.getAdapter();
-                if(adapter!=null){
+    public static void AddMoviesItens(RecyclerView view, PageMovie pageMovie) {
+        if (view != null) {
+            if (pageMovie != null) {
+                MovieAdapter adapter = (MovieAdapter) view.getAdapter();
+                if (adapter != null)
                     adapter.setMovieList(pageMovie);
-                }
+
             }
         }
 
     }
 
     @BindingAdapter("adapterFav")
-    public  static void AddMoviesItensFav(RecyclerView view, ArrayList<Movie> movies){
-        if(view!=null){
-            if(movies!=null){
-                MvAdapter adapter= (MvAdapter) view.getAdapter();
-                if(adapter!=null){
+    public static void AddMoviesItensFav(RecyclerView view, ArrayList<Movie> movies) {
+        if (view != null) {
+            if (movies != null) {
+                MvAdapter adapter = (MvAdapter) view.getAdapter();
+                if (adapter != null)
                     adapter.setMovieList(movies);
-                }
+
             }
         }
 
     }
 
     @BindingAdapter("adapterMvInfos")
-    public  static void AddMoviesItens(RecyclerView view,ArrayList<Cast> e){
-        if(view!=null){
-            if(e!=null){
-                CastAdapter adapter= (CastAdapter) view.getAdapter();
-                adapter.setItens(e);
+    public static void AddMoviesItens(RecyclerView view, ArrayList<Cast> e) {
+        if (view != null) {
+            if (e != null) {
+                CastAdapter adapter = (CastAdapter) view.getAdapter();
+                if (adapter != null) adapter.setItens(e);
             }
         }
 
     }
-
-
-
 
 
     @BindingAdapter({"imageUrl", "isBackdrop"})//Responsavel pelo carregamento das imagens
@@ -86,14 +81,14 @@ public class BindingAdapters {
         } else {
             baseUrl = Constants.BASE_URL_IMG_P;
         }
-       if(imagePath!=null){
-           Glide.with(imageView.getContext())
-                   .load(baseUrl+ imagePath)
-                   //.placeholder(R.drawable.ic_refresh_24dp)
-                   .error(R.drawable.ic_broken_image_24dp)
-                   .diskCacheStrategy(DiskCacheStrategy.ALL)
-                   .into(imageView);
-       }
+        if (imagePath != null) {
+            Glide.with(imageView.getContext())
+                    .load(baseUrl + imagePath)
+                    //.placeholder(R.drawable.ic_refresh_24dp)
+                    .error(R.drawable.ic_broken_image_24dp)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageView);
+        }
 
 
     }
@@ -101,9 +96,9 @@ public class BindingAdapters {
     @BindingAdapter("imageUrlCircle")//Responsavel pelo carregamento das imagens
     public static void bindImage(ImageView imageView, String imagePath) {
         //baseUrl = Constants.BASE_URL_IMG_M;
-        if(imagePath!=null){
+        if (imagePath != null) {
             Glide.with(imageView.getContext())
-                    .load(Constants.BASE_URL_IMG_P+ imagePath)
+                    .load(Constants.BASE_URL_IMG_P + imagePath)
                     //.placeholder(R.drawable.ic_refresh_24dp)
                     .error(R.drawable.ic_broken_image_24dp)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -114,12 +109,11 @@ public class BindingAdapters {
     }
 
 
-
     @BindingAdapter("visibleGone")//tira a visibilidade da view
     public static void showHide(View view, Boolean show) {
         if (show) {
             view.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             view.setVisibility(View.GONE);
         }
     }
