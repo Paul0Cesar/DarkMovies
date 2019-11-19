@@ -6,4 +6,5 @@
     <string name="title_home">Inicio</string>
     <string name="title_search">Buscas</string>
     <string name="title_fav">Favoritos</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

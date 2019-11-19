@@ -45,11 +45,14 @@ public class ApplicationModule {
         return appPreferences;
     }
 
+
     @Provides
     @Singleton
     ApiHelper provideAppApi(AppApiHelper appApiHelper){
         return appApiHelper;
     }
+
+
 
 
 

@@ -29,24 +29,24 @@ public class FavViewModel extends BaseViewModel {
         return mMovies;
     }
 
-     LiveData<String> getNavigator() {
+    LiveData<String> getNavigator() {
         return mNavigator;
     }
 
 
-     void initData() {
+    void initData() {
         ArrayList<Movie> movies = getDataManager().getAlLMovies();
         if (movies != null) {
             mMovies.postValue(movies);
         }
     }
 
-     long getMovieToSee() {//retorna o filme que vai ser exibido
+    long getMovieToSee() {//retorna o filme que vai ser exibido
         return toSee.getId();
     }
 
 
-     MvAdapter.onClickListenerAdapter onClick() {
+    MvAdapter.onClickListenerAdapter onClick() {
         return new MvAdapter.onClickListenerAdapter() {
             @Override
             public void onClick(Movie e) {

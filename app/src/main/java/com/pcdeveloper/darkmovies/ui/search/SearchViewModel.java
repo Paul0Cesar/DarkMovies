@@ -10,7 +10,6 @@ import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.ui.base.BaseViewModel;
 import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.Err;
-
 import java.util.ArrayList;
 
 public class SearchViewModel extends BaseViewModel {

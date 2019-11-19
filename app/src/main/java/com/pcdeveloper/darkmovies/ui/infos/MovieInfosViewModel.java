@@ -12,7 +12,6 @@ import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.Err;
 
 
-
 public class MovieInfosViewModel extends BaseViewModel {
 
     private MutableLiveData<Movie> mMovie=new MutableLiveData<>();

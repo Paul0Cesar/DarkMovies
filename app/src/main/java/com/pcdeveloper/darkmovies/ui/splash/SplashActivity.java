@@ -49,6 +49,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
             @Override
             public void run() {
                 openMainActivity();
+                finish();
             }
         }, 2000);
 

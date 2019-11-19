@@ -26,4 +26,5 @@ public abstract class BaseViewModel extends ViewModel {
         return dataManager;
     }
 
+
 }

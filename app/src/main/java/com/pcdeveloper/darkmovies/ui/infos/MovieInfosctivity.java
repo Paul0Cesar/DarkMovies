@@ -23,6 +23,8 @@ import com.pcdeveloper.darkmovies.di.ViewModelProviderFactory;
 import com.pcdeveloper.darkmovies.ui.base.BaseActivity;
 import com.pcdeveloper.darkmovies.util.Err;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 public class MovieInfosctivity extends BaseActivity<ActivityMovieInfosBinding, MovieInfosViewModel> {

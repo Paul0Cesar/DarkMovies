@@ -8,7 +8,7 @@ public class SplashViewModel extends BaseViewModel {
 
     //private Poster movie;
 
-    public SplashViewModel(DataManager dataManager) {
+    public SplashViewModel(DataManager dataManager ) {
         super(dataManager);
     }
 
