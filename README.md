@@ -1,5 +1,21 @@
 # DarkMovies
 
+
+<p align="center">
+  <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs/1.png" width="250">
+  <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs/2.png" width="250">
+  <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs/3.png" width="250">
+</p>
+<br>
+<p align="center">
+  <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs4.png" width="200">
+  <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs/5.png" width="200">
+  <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs/6.png" width="200">
+</p>
+<br>
+<br>
+
+
 #### O Aplicativo está separado em:
 1. **data**: Contém todas as classe de manipulção de dados
 2. **di**: Contém as classe responsáveis pelo injetor de Dependência 
