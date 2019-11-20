@@ -8,7 +8,7 @@
 </p>
 <br>
 <p align="center">
-  <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs4.png" width="200">
+  <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs/4.png" width="200">
   <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs/5.png" width="200">
   <img src="https://github.com/Paul0Cesar/DarkMovies/blob/master/imgs/6.png" width="200">
 </p>
