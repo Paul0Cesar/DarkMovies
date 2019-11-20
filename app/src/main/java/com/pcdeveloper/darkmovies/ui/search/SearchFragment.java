@@ -73,7 +73,7 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding, SearchVi
     private void initRecycler() {
         RecyclerView recyclerView = getDataBinding().recyclerResults;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getBaseActiviy(), LinearLayout.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
         mAdapter.onClickListener(getViewModel().onClick());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);

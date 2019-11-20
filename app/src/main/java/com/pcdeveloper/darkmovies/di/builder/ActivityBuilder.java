@@ -5,6 +5,7 @@ import com.pcdeveloper.darkmovies.di.module.FragmentModule;
 import com.pcdeveloper.darkmovies.di.module.UtilModule;
 import com.pcdeveloper.darkmovies.ui.infos.MovieInfosctivity;
 import com.pcdeveloper.darkmovies.ui.main.MainActivity;
+import com.pcdeveloper.darkmovies.ui.maps.MapsActivity;
 import com.pcdeveloper.darkmovies.ui.splash.SplashActivity;
 
 import dagger.Module;
@@ -27,4 +28,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = UtilModule.class)
     abstract MovieInfosctivity bindMovieInfosctivity();
+
+    @ContributesAndroidInjector
+    abstract MapsActivity bindMapnfosctivity();
 }

@@ -101,7 +101,7 @@ public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding, FavV
     private void initRecycler() {
         RecyclerView recyclerView = getDataBinding().recyclerFav;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getBaseActiviy(), LinearLayout.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
         mAdapter.onClickListener(getViewModel().onClick());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);

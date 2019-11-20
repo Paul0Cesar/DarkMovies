@@ -1,13 +1,12 @@
 package com.pcdeveloper.darkmovies.data.network;
 
 
-import com.pcdeveloper.darkmovies.data.models.Cast;
+
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.webObjects.CastResponse;
 import com.pcdeveloper.darkmovies.data.network.webObjects.SearchResult;
 
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

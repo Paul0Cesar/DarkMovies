@@ -2,6 +2,8 @@ package com.pcdeveloper.darkmovies.ui.infos;
 
 
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.pcdeveloper.darkmovies.data.DataManager;

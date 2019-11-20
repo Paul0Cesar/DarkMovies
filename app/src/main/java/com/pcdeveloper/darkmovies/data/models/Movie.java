@@ -23,6 +23,7 @@ public class Movie  extends RealmObject {
     @SerializedName("release_date")
     private String releaseDate;
 
+    @SerializedName("adult")
     private Boolean adult;
 
     @Ignore
@@ -30,6 +31,10 @@ public class Movie  extends RealmObject {
 
     @Ignore
     private ArrayList<Cast>casts;
+
+    @Ignore
+    @SerializedName("production_countries")
+    private ArrayList<Countrie> countries;
 
 
     @SerializedName("overview")
@@ -164,5 +169,13 @@ public class Movie  extends RealmObject {
 
     public void setVoteAverage(float voteAverage) {
         this.voteAverage = voteAverage;
+    }
+
+    public ArrayList<Countrie> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(ArrayList<Countrie> countries) {
+        this.countries = countries;
     }
 }

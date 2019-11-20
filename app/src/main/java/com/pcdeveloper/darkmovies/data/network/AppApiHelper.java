@@ -3,13 +3,13 @@ package com.pcdeveloper.darkmovies.data.network;
 import android.content.Context;
 import android.util.Log;
 
-import com.pcdeveloper.darkmovies.data.db.DbHelper;
-import com.pcdeveloper.darkmovies.data.models.Cast;
+import androidx.annotation.NonNull;
+
 import com.pcdeveloper.darkmovies.data.models.Movie;
-import com.pcdeveloper.darkmovies.data.models.Poster;
 import com.pcdeveloper.darkmovies.data.models.PageMovie;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
 import com.pcdeveloper.darkmovies.data.network.webObjects.CastResponse;
+import com.pcdeveloper.darkmovies.data.network.webObjects.IsoMap;
 import com.pcdeveloper.darkmovies.data.network.webObjects.SearchResult;
 import com.pcdeveloper.darkmovies.util.Constants;
 import com.pcdeveloper.darkmovies.util.Methods;
@@ -28,16 +28,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Singleton
 public class AppApiHelper implements  ApiHelper {
 
-    private Context mContext;
     private Retrofit mRetrofit;
     private String BASE_URL= Constants.BASE_URL;
     private String API_KEY=Constants.API_KEY;
     private ApiService mService;
+    private Retrofit mRetrofitMap;
+    private ApiServiceMap mServiceMap;
 
 
     @Inject
     public AppApiHelper(Context mContext) {
-        this.mContext = mContext;
         startConnection();
     }
 
@@ -60,7 +60,7 @@ public class AppApiHelper implements  ApiHelper {
             Call<PageMovie> call=this.mService.getNowPlaying(API_KEY,language,page);
             call.enqueue(new Callback<PageMovie>() {
                 @Override
-                public void onResponse(Call<PageMovie> call, Response<PageMovie> response) {
+                public void onResponse(@NonNull  Call<PageMovie> call, Response<PageMovie> response) {
                     if(response.isSuccessful()){
                         PageMovie pageMovie=response.body();
                         if(pageMovie!=null && pageMovie.getPosters()!=null){
@@ -125,7 +125,7 @@ public class AppApiHelper implements  ApiHelper {
             Call<SearchResult>call=mService.searchMovie(API_KEY,key);
             call.enqueue(new Callback<SearchResult>() {
                 @Override
-                public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
+                public void onResponse(@NonNull Call<SearchResult> call, Response<SearchResult> response) {
                     if(response.isSuccessful()){
                         callBackto.result(response.body().getMovies());
                     }else{
@@ -142,6 +142,9 @@ public class AppApiHelper implements  ApiHelper {
             callBackto.onErro(Methods.err("searchMovies","Erro no Service {Vazio}",-1),null);
         }
     }
+
+   
+
 
     public void getCastByMovieId(long movie_id, final Movie movie, final CallBackto<Movie> callBackto) {
         if(mService!=null){
@@ -172,6 +175,40 @@ public class AppApiHelper implements  ApiHelper {
             callBackto.onErro(Methods.err("getCastByMovieId","Erro no Service {Vazio}",-1),null);
             callBackto.isRefreshing(false);
         }
+
+    }
+
+
+    //https://restcountries.eu/#api-endpoints-code
+    /*Usado para converter o iso code em coordenadas geograficas*/
+    @Override
+    public void getCoordToMap(String iso, final CallBackto<IsoMap> callBackto) {
+        if(this.mRetrofitMap==null){
+            this.mRetrofitMap  = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL_MAP)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+        }
+        this.mServiceMap=this.mRetrofitMap.create(ApiServiceMap.class);
+
+        Call<IsoMap>call=mServiceMap.convertISoMaṕ(iso);
+
+        call.enqueue(new Callback<IsoMap>() {
+            @Override
+            public void onResponse(Call<IsoMap> call, Response<IsoMap> response) {
+                if(response.isSuccessful()){
+                   callBackto.result(response.body());
+                }else{
+                    callBackto.onErro(Methods.err("getCoordToMap","Erro na Requsição da LatLong",-1),null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IsoMap> call, Throwable t){
+                callBackto.onErro(Methods.err("searchMovies","Erro na Requsição dos Filmes",t.hashCode()),t);
+            }
+        });
 
     }
 

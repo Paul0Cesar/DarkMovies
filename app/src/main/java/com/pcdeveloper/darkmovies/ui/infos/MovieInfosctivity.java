@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.pcdeveloper.darkmovies.BR;
 import com.pcdeveloper.darkmovies.R;
 import com.pcdeveloper.darkmovies.adapters.CastAdapter;
@@ -21,6 +24,7 @@ import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.databinding.ActivityMovieInfosBinding;
 import com.pcdeveloper.darkmovies.di.ViewModelProviderFactory;
 import com.pcdeveloper.darkmovies.ui.base.BaseActivity;
+import com.pcdeveloper.darkmovies.ui.maps.MapsActivity;
 import com.pcdeveloper.darkmovies.util.Err;
 
 import java.util.Locale;
@@ -71,6 +75,18 @@ public class MovieInfosctivity extends BaseActivity<ActivityMovieInfosBinding, M
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mCastAdapter);
+
+        getViewDataBinding().btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Movie e=getViewModel().getMovieInfos().getValue();
+               if(e!=null){
+                   Intent i=new Intent(getBaseContext(),MapsActivity.class);
+                   i.putExtra("movie",new Gson().toJson(e));
+                   startActivity(i);
+               }
+            }
+        });
     }
 
     private void initObservers() {

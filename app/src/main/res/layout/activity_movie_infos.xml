@@ -67,7 +67,7 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/movie_infos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -299,16 +299,36 @@
                     android:layout_marginRight="8dp"
                     android:orientation="horizontal"
                     app:adapterMvInfos="@{movie.casts}"
-                    app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                    app:layout_constraintEnd_toStartOf="@+id/linear"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_map_24dp"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_cast" />
+
+                <LinearLayout
+                    android:id="@+id/linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_cast">
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="Ver no mapa:"
+                        android:textColor="@color/colorAccent" />
+
+                    <ImageButton
+                        android:id="@+id/btn_map"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_map_24dp"
+                        tools:ignore="VectorDrawableCompat" />
+                </LinearLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

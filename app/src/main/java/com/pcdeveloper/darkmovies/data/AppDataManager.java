@@ -7,6 +7,7 @@ import com.pcdeveloper.darkmovies.data.db.dao.MovieDao;
 import com.pcdeveloper.darkmovies.data.models.Movie;
 import com.pcdeveloper.darkmovies.data.network.ApiHelper;
 import com.pcdeveloper.darkmovies.data.network.CallBack.CallBackto;
+import com.pcdeveloper.darkmovies.data.network.webObjects.IsoMap;
 import com.pcdeveloper.darkmovies.data.prefs.PrefsHelper;
 
 import java.util.ArrayList;
@@ -70,6 +71,11 @@ public class AppDataManager  implements DataManager {
     @Override
     public void searchMovies(String key, CallBackto<ArrayList<Movie>> callBackto) {
         mApiHelper.searchMovies(key,callBackto);
+    }
+
+    @Override
+    public void getCoordToMap(String iso, CallBackto<IsoMap> callBackto) {
+        mApiHelper.getCoordToMap(iso,callBackto);
     }
 
     @Override
